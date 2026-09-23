@@ -1,0 +1,32 @@
+---
+interface Props {
+  light?: boolean;
+}
+const { light = false } = Astro.props;
+---
+
+<span class:list={['logo', { light }]}>
+  <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+    <rect width="32" height="32" rx="8" fill="#0f766e"></rect>
+    <circle cx="11" cy="12" r="3.2" fill="#fff"></circle>
+    <circle cx="21" cy="12" r="3.2" fill="#fff"></circle>
+    <circle cx="16" cy="21" r="3.2" fill="#5eead4"></circle>
+    <path d="M11 12 16 21 21 12" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"></path>
+  </svg>
+  <span>Crew<b>Teams</b></span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .logo b { font-weight: 800; color: var(--brand); }
+  .light { color: #fff; }
+  .light b { color: var(--accent); }
+</style>

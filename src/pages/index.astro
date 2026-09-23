@@ -1,0 +1,288 @@
+---
+import Base from '../layouts/Base.astro';
+
+const pillars = [
+  {
+    key: 'engage',
+    name: 'Engage',
+    lead: 'Reach every worker, not just the ones at a desk.',
+    body: 'Mobile-first messaging, shift swaps, recognition, and pulse surveys that frontline crews actually open. Keep people informed and heard from their first shift onward.',
+    points: ['Targeted team & site announcements', 'Self-service shift swaps and time-off', 'Recognition and pulse surveys'],
+  },
+  {
+    key: 'predict',
+    name: 'Predict',
+    lead: 'See staffing gaps before they happen.',
+    body: 'AI models forecast demand, absenteeism, and attrition risk from your own operational data, so managers can act days ahead instead of scrambling on the day.',
+    points: ['Demand and labor forecasting', 'Absence and turnover risk signals', 'Scenario planning for peaks'],
+  },
+  {
+    key: 'orchestrate',
+    name: 'Orchestrate',
+    lead: 'Put the right crew on the right work.',
+    body: 'Build schedules, assign tasks, and rebalance labor across locations automatically, while respecting skills, certifications, availability, and labor rules.',
+    points: ['Skills- and rules-aware scheduling', 'Task assignment and tracking', 'Cross-site labor sharing'],
+  },
+];
+
+const steps = [
+  { n: '01', title: 'Connect', body: 'Plug in your HRIS, POS, WMS, or time & attendance systems. CrewTeams unifies the data into one live view of your workforce.' },
+  { n: '02', title: 'Understand', body: 'Forecasts and risk signals surface where you will be short, where engagement is slipping, and why.' },
+  { n: '03', title: 'Act', body: 'Recommended schedules, shift offers, and messages go out to crews in a tap, and every action feeds the next forecast.' },
+];
+
+const industries = [
+  { name: 'Retail', body: 'Match staffing to foot traffic and promotions across every store.' },
+  { name: 'Hospitality', body: 'Flex crews around occupancy, events, and seasonal swings.' },
+  { name: 'Logistics & Warehousing', body: 'Plan labor against inbound volume and delivery windows.' },
+  { name: 'Healthcare', body: 'Keep units covered with credential-aware scheduling.' },
+  { name: 'Manufacturing', body: 'Balance lines and shifts while tracking certifications.' },
+  { name: 'Facilities & Field Services', body: 'Dispatch mobile crews and keep every site in the loop.' },
+];
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Frontline workforce management</span>
+        <h1>
+          <span class="t-engage">Engage.</span>
+          <span class="t-predict">Predict.</span>
+          <span class="t-orchestrate">Orchestrate.</span>
+        </h1>
+        <p class="lede">
+          CrewTeams is the AI-powered platform that keeps frontline crews connected, anticipates staffing needs,
+          and runs every shift across every location from one place.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#demo">Book a demo</a>
+          <a class="btn btn-ghost" href="#platform">See the platform</a>
+        </div>
+      </div>
+
+      <div class="mock" aria-hidden="true">
+        <div class="mock-head">
+          <span>This week · Downtown</span>
+          <span class="chip">Live</span>
+        </div>
+        <div class="mock-stats">
+          <div><small>Coverage</small><strong>96%</strong></div>
+          <div><small>Open shifts</small><strong>4</strong></div>
+          <div><small>Engagement</small><strong>8.4</strong></div>
+        </div>
+        <div class="mock-chart">
+          <small>Forecast vs. scheduled hours</small>
+          <div class="bars">
+            {[62, 70, 58, 80, 92, 100, 74].map((h, i) => (
+              <div class="bar-col">
+                <span class="bar" style={`height:${h}%`}></span>
+                <em>{['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}</em>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="mock-alert">
+          <span class="dot"></span>
+          <div>
+            <strong>Saturday gap predicted</strong>
+            <small>3 shifts offered to qualified crew · 2 accepted</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillars -->
+  <section id="platform" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The platform</span>
+        <h2>One platform for the people who keep your business running</h2>
+        <p>Desk-based software wasn't built for crews on the floor, on the road, or on the line. CrewTeams was.</p>
+      </div>
+      <div class="pillars">
+        {pillars.map((p) => (
+          <article class={`pillar ${p.key}`}>
+            <span class="pillar-tag">{p.name}</span>
+            <h3>{p.lead}</h3>
+            <p>{p.body}</p>
+            <ul>
+              {p.points.map((pt) => <li>{pt}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From scattered data to a coordinated crew</h2>
+      </div>
+      <ol class="steps">
+        {steps.map((s) => (
+          <li>
+            <span class="step-n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section id="industries" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Industries</span>
+        <h2>Built for shift-based, multi-site operations</h2>
+      </div>
+      <div class="industries">
+        {industries.map((ind) => (
+          <div class="industry">
+            <h3>{ind.name}</h3>
+            <p>{ind.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo CTA + Netlify form -->
+  <section id="demo" class="section cta">
+    <div class="container cta-grid">
+      <div>
+        <span class="eyebrow light">Get started</span>
+        <h2>See CrewTeams with your own operation in mind</h2>
+        <p>
+          Tell us a little about your teams and we'll set up a tailored walkthrough of how CrewTeams can engage
+          your crews, predict your staffing needs, and orchestrate your shifts.
+        </p>
+      </div>
+
+      <form name="demo" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company-url" class="form">
+        <input type="hidden" name="form-name" value="demo" />
+        <p class="sr-only"><label>Leave this empty: <input name="company-url" tabindex="-1" autocomplete="off" /></label></p>
+
+        <label>Full name<input name="name" required autocomplete="name" /></label>
+        <label>Work email<input type="email" name="email" required autocomplete="email" /></label>
+        <label>Company<input name="company" required autocomplete="organization" /></label>
+        <label>
+          Frontline headcount
+          <select name="headcount">
+            <option>Under 250</option>
+            <option>250–1,000</option>
+            <option>1,000–5,000</option>
+            <option>5,000+</option>
+          </select>
+        </label>
+        <button class="btn btn-primary" type="submit">Request a demo</button>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: clamp(56px, 8vw, 104px) 0 clamp(64px, 9vw, 112px);
+    background:
+      radial-gradient(900px 400px at 85% 10%, rgba(94, 234, 212, 0.25), transparent 60%),
+      radial-gradient(700px 400px at 10% 90%, rgba(79, 70, 229, 0.08), transparent 60%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+  h1 span { display: block; }
+  .t-engage { color: var(--engage); }
+  .t-predict { color: var(--predict); }
+  .t-orchestrate { color: var(--orchestrate); }
+  .lede { font-size: 1.2rem; color: var(--ink-soft); max-width: 540px; margin: 8px 0 32px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Product mock */
+  .mock {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 30px 60px -20px rgba(11, 31, 29, 0.25);
+    display: grid;
+    gap: 16px;
+  }
+  .mock small { color: var(--muted); font-size: 0.75rem; display: block; }
+  .mock-head { display: flex; justify-content: space-between; align-items: center; font-weight: 650; font-size: 0.95rem; }
+  .chip { background: #dcfce7; color: #166534; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+  .mock-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .mock-stats div { background: var(--bg-alt); border-radius: 12px; padding: 12px; }
+  .mock-stats strong { font-size: 1.4rem; }
+  .mock-chart { background: var(--bg-alt); border-radius: 12px; padding: 14px; }
+  .bars { display: flex; align-items: flex-end; gap: 8px; height: 110px; margin-top: 10px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; }
+  .bar { width: 100%; border-radius: 6px 6px 3px 3px; background: linear-gradient(180deg, var(--accent), var(--brand)); }
+  .bar-col:nth-child(6) .bar { background: linear-gradient(180deg, #fdba74, var(--orchestrate)); }
+  .bar-col em { font-style: normal; font-size: 0.7rem; color: var(--muted); }
+  .mock-alert { display: flex; gap: 12px; align-items: flex-start; border: 1px solid #fed7aa; background: #fff7ed; border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orchestrate); margin-top: 6px; flex: none; }
+
+  /* Pillars */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pillar {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--c);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+  }
+  .pillar.engage { --c: var(--engage); }
+  .pillar.predict { --c: var(--predict); }
+  .pillar.orchestrate { --c: var(--orchestrate); }
+  .pillar-tag { display: inline-block; font-weight: 800; color: var(--c); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .pillar p { color: var(--ink-soft); }
+  .pillar ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 0.95rem; }
+  .pillar li { padding-left: 22px; position: relative; }
+  .pillar li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 10px; height: 10px; border-radius: 3px; background: var(--c); opacity: 0.8; }
+
+  /* Steps */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .step-n { display: block; font-size: 0.9rem; font-weight: 800; color: var(--brand); margin-bottom: 12px; border-bottom: 2px solid var(--line); padding-bottom: 12px; }
+  .steps p { color: var(--ink-soft); }
+
+  /* Industries */
+  .industries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .industry { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .industry h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .industry p { color: var(--ink-soft); margin: 0; font-size: 0.95rem; }
+
+  /* CTA */
+  .cta { background: var(--ink); color: #dbe7e5; }
+  .cta h2 { color: #fff; }
+  .eyebrow.light { color: var(--accent); }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .form { background: #fff; color: var(--ink); border-radius: 18px; padding: 28px; display: grid; gap: 14px; }
+  .form label { display: grid; gap: 6px; font-weight: 600; font-size: 0.9rem; }
+  .form input, .form select {
+    font: inherit; font-weight: 400; padding: 11px 12px; border: 1.5px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink);
+  }
+  .form input:focus, .form select:focus { border-color: var(--brand); outline: none; }
+  .form button { justify-content: center; margin-top: 6px; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .cta-grid { grid-template-columns: 1fr; }
+    .pillars, .steps { grid-template-columns: 1fr; }
+    .industries { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .industries { grid-template-columns: 1fr; }
+    .mock-stats strong { font-size: 1.15rem; }
+  }
+</style>
