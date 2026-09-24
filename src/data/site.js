@@ -18,10 +18,10 @@ export const nav = [
     href: '/platform/',
     children: [
       { label: 'Platform Overview', href: '/platform/' },
-      { label: 'CARI™ Agentic AI', href: '/platform/cari/' },
       { label: 'Biometric Time & Attendance', href: '/platform/time-attendance/' },
       { label: 'Mobilize™ — The Crew App', href: '/platform/mobilize/' },
       { label: 'Compliance Shield™', href: '/platform/compliance-shield/' },
+      { label: 'CARI™ Agentic AI', href: '/platform/cari/' },
       { label: 'Integrations', href: '/platform/integrations/' },
     ],
   },
