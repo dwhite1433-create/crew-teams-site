@@ -1,62 +1,35 @@
 ---
-import Logo from './Logo.astro';
-
-const links = [
-  { href: '/#platform', label: 'Platform' },
-  { href: '/#how-it-works', label: 'How it works' },
-  { href: '/#industries', label: 'Industries' },
-];
+import { nav, site } from '../data/site.js';
 ---
-
-<a class="skip sr-only" href="#main">Skip to content</a>
-<header class="header">
-  <div class="container bar">
-    <a href="/" aria-label="CrewTeams home"><Logo /></a>
-
-    <nav aria-label="Primary">
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="CrewTeams home"><img src="/img/logo-nav.png" alt="CrewTeams" width="168" height="56" /></a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="main-nav" aria-label="Main">
       <ul>
-        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        {nav.map((item) => (
+          <li>
+            <a class="top" href={item.href}>{item.label}</a>
+            {item.children && (
+              <ul class="dropdown">
+                {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+              </ul>
+            )}
+          </li>
+        ))}
       </ul>
+      <div class="nav-actions">
+        <a class="login" href={site.loginUrl}>Login</a>
+        <a class="btn btn-primary" href={site.demoUrl}>Request a Demo</a>
+      </div>
     </nav>
-
-    <a class="btn btn-primary cta" href="/#demo">Book a demo</a>
   </div>
 </header>
-
-<style>
-  .skip:focus {
-    position: fixed; top: 8px; left: 8px; z-index: 100;
-    width: auto; height: auto; clip: auto; padding: 10px 14px;
-    background: #fff; border-radius: 8px;
-  }
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    height: 68px;
-  }
-  .bar > a:first-child { text-decoration: none; }
-  ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
-  nav a {
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-weight: 550;
-    font-size: 0.95rem;
-  }
-  nav a:hover { color: var(--ink); }
-  .cta { padding: 10px 18px; font-size: 0.95rem; }
-
-  @media (max-width: 760px) {
-    nav { display: none; }
-    .cta { padding: 9px 14px; font-size: 0.9rem; }
-  }
-</style>
+<script>
+  const t = document.querySelector('.menu-toggle');
+  const n = document.querySelector('.main-nav');
+  t?.addEventListener('click', () => {
+    const open = n.classList.toggle('open');
+    t.setAttribute('aria-expanded', String(open));
+  });
+</script>

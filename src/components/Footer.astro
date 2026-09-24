@@ -1,37 +1,25 @@
 ---
-import Logo from './Logo.astro';
+import { nav, site } from '../data/site.js';
 const year = new Date().getFullYear();
 ---
-
-<footer class="footer">
-  <div class="container inner">
-    <div>
-      <Logo light />
-      <p class="tag">Engage. Predict. Orchestrate.</p>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="/img/logo-footer-white.png" alt="CrewTeams — Engage. Predict. Orchestrate." />
+        <p>The workforce platform for the crews who keep the physical economy running.</p>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a><br />{site.address}</p>
+      </div>
+      {nav.map((col) => (
+        <div>
+          <h4>{col.label}</h4>
+          <ul>{col.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}</ul>
+        </div>
+      ))}
     </div>
-    <nav aria-label="Footer">
-      <a href="/#platform">Platform</a>
-      <a href="/#industries">Industries</a>
-      <a href="/#demo">Book a demo</a>
-      <a href="mailto:hello@crewteams.ai">hello@crewteams.ai</a>
-    </nav>
+    <div class="footer-bottom">
+      <span>© {year} CrewTeams. All rights reserved.</span>
+      <span>CrewTeams is a sister brand of CareTeams.</span>
+    </div>
   </div>
-  <div class="container legal">© {year} CrewTeams. All rights reserved.</div>
 </footer>
-
-<style>
-  .footer { background: var(--ink); color: #b8c9c6; padding: 56px 0 28px; }
-  .inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 32px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .tag { margin: 12px 0 0; font-size: 0.95rem; }
-  nav { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; }
-  nav a { color: #dbe7e5; text-decoration: none; font-size: 0.95rem; }
-  nav a:hover { color: #fff; }
-  .legal { padding-top: 24px; font-size: 0.85rem; }
-</style>

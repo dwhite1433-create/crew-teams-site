@@ -2,20 +2,9 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
-interface Props {
-  title?: string;
-  description?: string;
-}
-
-const {
-  title = 'CrewTeams — Frontline Workforce Management',
-  description = 'CrewTeams helps frontline organizations engage their crews, predict staffing needs, and orchestrate work across every shift and location.',
-} = Astro.props;
-
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const { title = 'CrewTeams', description = 'The workforce platform for frontline crews — biometric time & attendance, motivation science and agentic AI.' } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,28 +13,19 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#0f766e" />
-
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#1E63A5" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="CrewTeams" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <meta property="og:image" content={new URL('/img/logo-tagline.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <Header />
-    <main id="main">
-      <slot />
-    </main>
+    <main id="main"><slot /></main>
     <Footer />
   </body>
 </html>

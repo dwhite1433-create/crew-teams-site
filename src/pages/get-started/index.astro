@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site.js';
+const industries = ['Construction', 'Industrial Cleaning', 'Manufacturing', 'Security Services', 'Transportation & Logistics', 'Other'];
+---
+<Base title="Request a Demo | CrewTeams">
+  <section class="section soft">
+    <div class="wrap demo">
+      <div>
+        <span class="eyebrow">Get started</span>
+        <h1>See CrewTeams on your crews’ day.</h1>
+        <p class="lede">Tell us a little about your operation. We’ll set up a walkthrough of a shift at one of your sites, from verified clock-in to same-shift pay.</p>
+        <ul class="ticks dark-ticks">
+          <li>30-minute live demo tailored to your industry</li>
+          <li>Biometric time &amp; attendance, scheduling and CARI™ in action</li>
+          <li>No commitment</li>
+        </ul>
+        <p style="margin-top:28px">Prefer email? <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+      <form class="demo-form" name="demo-request" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company-url">
+        <input type="hidden" name="form-name" value="demo-request" />
+        <p class="hp"><label>Leave blank <input name="company-url" /></label></p>
+        <div class="row">
+          <label>First name<input id="first" name="first-name" required autocomplete="given-name" /></label>
+          <label>Last name<input id="last" name="last-name" required autocomplete="family-name" /></label>
+        </div>
+        <label>Work email<input id="email" name="email" type="email" required autocomplete="email" /></label>
+        <label>Company<input id="company" name="company" required autocomplete="organization" /></label>
+        <div class="row">
+          <label>Industry
+            <select id="industry" name="industry" required>
+              <option value="">Select…</option>
+              {industries.map((i) => <option>{i}</option>)}
+            </select>
+          </label>
+          <label>Frontline workers
+            <select id="size" name="workers">
+              <option value="">Select…</option>
+              <option>Under 100</option><option>100–499</option><option>500–1,999</option><option>2,000+</option>
+            </select>
+          </label>
+        </div>
+        <label>What would you like to solve?<textarea id="notes" name="message" rows="4"></textarea></label>
+        <button class="btn btn-primary" type="submit">Request a Demo</button>
+      </form>
+    </div>
+  </section>
+</Base>
+<style>
+  .demo { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .demo-form { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 32px; display: grid; gap: 16px; }
+  .demo-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .demo-form label { display: grid; gap: 6px; font-weight: 500; font-size: .95rem; color: var(--ink); }
+  .demo-form input, .demo-form select, .demo-form textarea { font: inherit; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--text); width: 100%; }
+  .demo-form input:focus, .demo-form select:focus, .demo-form textarea:focus { outline: 2px solid var(--teal); border-color: transparent; }
+  .demo-form button { justify-content: center; border: 0; cursor: pointer; }
+  .hp { display: none; }
+  .ticks { list-style: none; padding: 0; margin: 24px 0 0; }
+  .ticks li { position: relative; padding-left: 30px; margin-bottom: 12px; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: .45em; width: 16px; height: 9px; border-left: 3px solid var(--green-bright); border-bottom: 3px solid var(--green-bright); transform: rotate(-45deg); }
+  @media (max-width: 860px) { .demo, .demo-form .row { grid-template-columns: 1fr; gap: 24px; } }
+</style>
