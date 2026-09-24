@@ -1,0 +1,25 @@
+---
+import { nav, site } from '../data/site.js';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="/img/logo-footer-white.png" alt="CrewTeams — Engage. Predict. Orchestrate." />
+        <p>{site.positioning}</p>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a><br />{site.address}</p>
+      </div>
+      {nav.map((col) => (
+        <div>
+          <h4>{col.label}</h4>
+          <ul>{col.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}</ul>
+        </div>
+      ))}
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} CrewTeams. All rights reserved.</span>
+      <span>CrewTeams is a sister brand of CareTeams.</span>
+    </div>
+  </div>
+</footer>

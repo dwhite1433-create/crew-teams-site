@@ -1,0 +1,35 @@
+---
+import { nav, site } from '../data/site.js';
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="CrewTeams home"><img src="/img/logo-nav.png" alt="CrewTeams" width="168" height="56" /></a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="main-nav" aria-label="Main">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a class="top" href={item.href}>{item.label}</a>
+            {item.children && (
+              <ul class="dropdown">
+                {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div class="nav-actions">
+        <a class="login" href={site.loginUrl}>Login</a>
+        <a class="btn btn-primary" href={site.demoUrl}>Request a Demo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<script>
+  const t = document.querySelector('.menu-toggle');
+  const n = document.querySelector('.main-nav');
+  t?.addEventListener('click', () => {
+    const open = n.classList.toggle('open');
+    t.setAttribute('aria-expanded', String(open));
+  });
+</script>

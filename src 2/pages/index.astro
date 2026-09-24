@@ -1,0 +1,414 @@
+---
+import Base from '../layouts/Base.astro';
+import { capabilities, site } from '../data/site.js';
+
+const industries = ['Construction', 'Industrial Cleaning', 'Manufacturing', 'Security Services', 'Transportation & Logistics'];
+
+// PAIN -> OUTCOME. Each card names a problem the buyer has today, then what changes.
+const pains = [
+  {
+    pain: 'You’re paying for bad punches.',
+    detail: 'Buddy punching, off-site clock-ins and padded hours slip straight into payroll.',
+    fix: 'Every punch is face-matched, liveness-checked and tied to the job-site geofence. You pay for hours actually worked.',
+    tag: 'Verify',
+  },
+  {
+    pain: 'Credentials are expiring on the job.',
+    detail: 'You find out about the lapsed card when an inspector or a client does.',
+    fix: 'Compliance Shield™ tracks every credential and warns the worker and supervisor before it expires, so unqualified people never start a shift.',
+    tag: 'Comply',
+  },
+  {
+    pain: 'People don’t show up.',
+    detail: 'You learn about the no-show when the crew is already short.',
+    fix: 'Verified attendance from every site shows who’s on the job and who’s missing, in real time, from one screen.',
+    tag: 'Verify',
+  },
+  {
+    pain: 'Supervisors spend the day chasing people.',
+    detail: 'Calls, texts and group chats that nobody reads.',
+    fix: 'CARI™ reaches every worker by text in their own language. 95% of messages are read within 3 minutes.',
+    tag: 'Engage',
+  },
+  {
+    pain: 'Your best workers walk.',
+    detail: 'Waiting two weeks to get paid and never hearing “good job” makes the next offer easy to take.',
+    fix: 'Same-shift pay and recognition tied to real performance give crews a reason to stay.',
+    tag: 'Reward',
+  },
+];
+
+// ONE WORKER. ONE RECORD. EVERY SHIFT.
+const journey = [
+  { step: 'Onboarded', cap: 'Engage' },
+  { step: 'Credentialed', cap: 'Comply' },
+  { step: 'Shows up', cap: 'Verify' },
+  { step: 'Verified', cap: 'Verify' },
+  { step: 'Works compliant', cap: 'Comply' },
+  { step: 'Paid', cap: 'Reward' },
+  { step: 'Recognized', cap: 'Reward' },
+];
+
+const pillars = [
+  { step: 'Engage', text: 'Every worker connected by app or text, in their own language, from their first shift.' },
+  { step: 'Predict', text: 'Verified attendance and credential data give supervisors an early read on who’s missing and where risk is building.' },
+  { step: 'Orchestrate', text: 'Attendance, credentials, labor rules and pay work from the same record, so qualified people are on every site and every hour is paid right.' },
+];
+---
+<Base title="CrewTeams — Built for job sites, not desks">
+  <!-- 1. HERO: PAIN FIRST -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">{site.positioning}</p>
+        <h1>No-shows, expired credentials and bad punches <span class="grad-text">cost you every shift.</span></h1>
+        <p class="lede"><strong>Built for job sites, not desks.</strong> CrewTeams puts every worker’s verified shifts, credentials and pay in one place, from onboarding to payday, so the right people show up, stay compliant and get paid right.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={site.demoUrl}>Request a Demo</a>
+          <a class="btn btn-ghost" href="#problems">See what it fixes</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="/img/hero-biometrics.jpg" alt="Construction worker verifying his shift with facial biometrics on a phone at a job site" width="1800" height="982" />
+        <div class="chip chip-verify">
+          <span class="dot"></span>
+          <div><strong>Shift verified</strong><small>Face + liveness · inside site geofence</small></div>
+        </div>
+        <div class="chip chip-pay">
+          <strong>Same-shift pay</strong><small>Sent after clock-out</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES STRIP -->
+  <section class="industries">
+    <div class="wrap">
+      <p>Built for the crews behind</p>
+      <ul>{industries.map((i) => <li>{i}</li>)}</ul>
+    </div>
+  </section>
+
+  <!-- 2. PAIN -> OUTCOME -->
+  <section class="section soft" id="problems">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Sound familiar?</span>
+        <h2>The problems that cost you money this week.</h2>
+        <p class="lede">None of these are software problems until you try to fix them with spreadsheets, punch clocks and group texts.</p>
+      </div>
+      <div class="pains">
+        {pains.map((p) => (
+          <article class="pain">
+            <div class="pain-problem">
+              <h3>{p.pain}</h3>
+              <p>{p.detail}</p>
+            </div>
+            <div class="pain-fix">
+              <span class="fix-label">With CrewTeams <em>{p.tag}</em></span>
+              <p>{p.fix}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b. SIZE THE PROBLEM -->
+  <section class="section worth" id="savings">
+    <div class="wrap worth-grid">
+      <div>
+        <span class="eyebrow">What it’s worth</span>
+        <h2>Employers on our platform save <span class="grad-text">2–5% of total labor cost.</span></h2>
+        <p class="lede">The savings come from the problems above: hours you no longer pay for, overtime and compliance penalties you avoid, and fewer people to replace when your best workers stay.</p>
+      </div>
+      <div class="calc" aria-labelledby="calc-title">
+        <h3 id="calc-title">What 2–5% looks like for you</h3>
+        <label for="labor">Your annual frontline labor cost</label>
+        <div class="calc-input">
+          <span>$</span>
+          <input id="labor" type="text" inputmode="numeric" value="25,000,000" autocomplete="off" />
+        </div>
+        <div class="calc-out" aria-live="polite">
+          <span class="calc-range"><span id="lo">$500,000</span> – <span id="hi">$1,250,000</span></span>
+          <span class="calc-note">potential savings every year</span>
+        </div>
+        <p class="calc-fine">Based on results reported by employers on the underlying platform. Your results depend on workforce size, labor rules and how you run time and attendance today.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROOF -->
+  <section class="section dark proof">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Not a pilot. Already running.</span>
+        <h2>Proven technology, already in the field.</h2>
+        <p class="lede">CrewTeams is built on a certified biometric time &amp; attendance platform that already runs payroll-grade attendance for frontline employers under some of the world’s most complex labor rules.</p>
+      </div>
+      <div class="proof-stats">
+        <div><span class="num">70,000+</span><span>frontline workers on the underlying platform today</span></div>
+        <div><span class="num">4,000</span><span>workers at the largest single employer</span></div>
+        <div><span class="num">Certified</span><span>biometric time &amp; attendance, proven under Brazil’s strict labor law</span></div>
+        <div><span class="num">AWS</span><span>enterprise cloud infrastructure with facial recognition built in</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap field">
+      <div class="field-media">
+        <img class="f1" src="/img/crew-site.jpg" alt="Road construction crew in high-visibility vests on a job site" width="800" height="533" />
+        <img class="f2" src="/img/cleaning-lead.jpg" alt="Industrial cleaning team lead reviewing live site status" width="900" height="900" />
+      </div>
+      <div>
+        <span class="eyebrow">Built for job sites, not desks</span>
+        <h2>Works where your crews actually work.</h2>
+        <p class="lede">From a remote pipeline to a night shift at a plant, CrewTeams is designed for patchy signal, shared devices, many languages and union rules.</p>
+        <ul class="ticks dark-ticks">
+          <li><strong>Offline biometrics</strong> — verified punches even with no signal</li>
+          <li><strong>Geofenced sites</strong> — attendance tied to the actual job location</li>
+          <li><strong>Union &amp; CBA aware</strong> — overtime, rest and meal-break rules enforced automatically</li>
+          <li><strong>Localized for the U.S. and Canada</strong> — built on technology already proven at scale</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PLATFORM: THE WHOLE IS BETTER THAN THE PIECES -->
+  <section class="section soft" id="platform">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">The platform</span>
+        <h2>One worker. One record. Every shift.</h2>
+        <p class="lede">Most operators stitch this together from four or five tools that don’t talk to each other. In CrewTeams it’s one connected record, so nothing falls through the gaps between systems.</p>
+      </div>
+      <p class="swipe-hint" aria-hidden="true">Swipe to follow one worker’s shift <span>→</span></p>
+      <div class="journey-wrap">
+      <ol class="journey" aria-label="A worker's journey through CrewTeams">
+        {journey.map((j) => (
+          <li><span class="j-step">{j.step}</span><span class="j-cap">{j.cap}</span></li>
+        ))}
+      </ol>
+      </div>
+      <div class="caps">
+        {capabilities.map((c) => (
+          <article class="cap">
+            <div class="cap-top"><span class="cap-verb">{c.verb}</span></div>
+            <h3>{c.name}</h3>
+            <p>{c.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="epo">
+        <h3 class="epo-title">Engage. Predict. Orchestrate.</h3>
+        <div class="epo-grid">
+          {pillars.map((p) => (
+            <div><strong>{p.step}</strong><p>{p.text}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CARI -->
+  <section class="section dark">
+    <div class="wrap cari">
+      <div>
+        <span class="eyebrow">The intelligence layer</span>
+        <h2>Meet CARI™, the AI your crews actually talk to.</h2>
+        <p class="lede">CARI answers questions from workers and supervisors, flags compliance issues before they become problems and keeps everyone informed across sites. It works by text message, so no one has to download anything to get started.</p>
+        <ul class="ticks">
+          <li>Plain-language answers for supervisors and workers</li>
+          <li>Alerts before a credential expires</li>
+          <li>95% of messages read within 3 minutes</li>
+          <li>Works in each worker’s language</li>
+        </ul>
+      </div>
+      <div class="phone" aria-label="Example CARI text conversation">
+        <div class="phone-bar"><img src="/img/icon.png" alt="" width="28" height="28" /> CARI™</div>
+        <div class="msg in">Morning Luis — your OSHA-10 card expires in 14 days. Reply with a photo of your renewed card and I’ll update your record.</div>
+        <div class="msg out">Will do tonight.</div>
+        <div class="msg in">Thanks. Yesterday’s shift at Site 14 is verified, and your pay is on its way.</div>
+        <div class="msg-meta">Read · 1 min</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DEMO -->
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <div>
+        <h2>Bring us your three biggest crew problems.</h2>
+        <p>We’ll walk through a shift at one of your sites, from verified clock-in to same-shift pay, and show you how each one gets fixed.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-light" href={site.demoUrl}>Request a Demo</a>
+        <a class="btn btn-outline-light" href={`mailto:${site.email}`}>Email us</a>
+      </div>
+    </div>
+  </section>
+  <script>
+  const input = document.getElementById('labor');
+  const lo = document.getElementById('lo');
+  const hi = document.getElementById('hi');
+  const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
+  const update = () => {
+    const digits = (input.value || '').replace(/[^0-9]/g, '');
+    const n = Number(digits) || 0;
+    input.value = digits ? n.toLocaleString('en-US') : '';
+    lo.textContent = fmt(n * 0.02);
+    hi.textContent = fmt(n * 0.05);
+  };
+  input?.addEventListener('input', update);
+  </script>
+</Base>
+
+
+<style>
+  /* Hero */
+  .hero { padding: 72px 0 56px; background: radial-gradient(1200px 500px at 85% -10%, rgba(26,138,80,.10), transparent 60%), radial-gradient(900px 500px at -10% 10%, rgba(30,99,165,.10), transparent 60%); }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.3rem); text-wrap: balance; }
+  .hero-copy .lede { margin: 18px 0 30px; }
+  .hero-copy .lede strong { color: var(--ink); font-weight: 700; }
+  .kicker { font-size: clamp(1.1rem, 1.6vw, 1.3rem); font-weight: 700; line-height: 1.35; color: var(--teal); margin: 0 0 18px; padding-left: 14px; border-left: 4px solid var(--gold); text-wrap: balance; }
+  .hero-media { position: relative; }
+  .hero-media img { border-radius: 22px; box-shadow: 0 30px 60px rgba(11,31,51,.18); aspect-ratio: 4/3.4; object-fit: cover; object-position: 55% center; width: 100%; }
+  .chip { position: absolute; background: #fff; border-radius: 14px; box-shadow: var(--shadow); padding: 12px 16px; display: flex; gap: 10px; align-items: center; font-size: .9rem; }
+  .chip strong { display: block; color: var(--ink); }
+  .chip small { color: var(--muted); }
+  .chip-verify { left: -28px; bottom: 36px; }
+  .chip-pay { right: -18px; top: 28px; flex-direction: column; align-items: flex-start; gap: 0; border-left: 4px solid var(--gold); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 0 5px rgba(42,145,86,.18); flex: none; }
+
+  /* Industries strip */
+  .industries { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; }
+  .industries .wrap { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; justify-content: center; }
+  .industries p { margin: 0; color: var(--muted); font-size: .9rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 500; }
+  .industries ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: center; }
+  .industries li { font-weight: 700; color: var(--ink); }
+
+  .head { max-width: 760px; margin-bottom: 44px; }
+  .head.center { margin-left: auto; margin-right: auto; }
+  .head h2 { text-wrap: balance; }
+
+  /* Pain -> outcome */
+  .pains { display: grid; gap: 14px; }
+  .pain { display: grid; grid-template-columns: 1fr 1.15fr; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 10px rgba(11,31,51,.05); }
+  .pain-problem { padding: 24px 28px; border-left: 4px solid #C8553D; }
+  .pain-problem h3 { font-size: 1.2rem; margin-bottom: 6px; }
+  .pain-problem p { margin: 0; color: var(--muted); font-size: .97rem; }
+  .pain-fix { padding: 24px 28px; background: #EEF6F2; }
+  .pain-fix p { margin: 0; color: var(--text); }
+  .fix-label { display: flex; align-items: center; gap: 10px; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+  .fix-label em { font-style: normal; color: #fff; background: var(--brand-grad); padding: 2px 9px; border-radius: 999px; letter-spacing: .1em; }
+
+
+  /* Size the problem */
+  .worth-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+  .worth h2 { text-wrap: balance; }
+  .calc { background: var(--bg-soft); border-radius: 20px; padding: 32px; display: grid; gap: 12px; border: 1px solid var(--line); }
+  .calc h3 { margin: 0 0 4px; }
+  .calc label { font-weight: 500; font-size: .95rem; color: var(--muted); }
+  .calc-input { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; }
+  .calc-input:focus-within { outline: 2px solid var(--teal); border-color: transparent; }
+  .calc-input span { font-size: 1.4rem; font-weight: 700; color: var(--muted); }
+  .calc-input input { font: inherit; font-size: 1.4rem; font-weight: 700; color: var(--ink); border: 0; outline: 0; padding: 12px 0; width: 100%; background: transparent; font-variant-numeric: tabular-nums; }
+  .calc-out { background: var(--ink); border-radius: 14px; padding: 20px 22px; display: grid; gap: 4px; margin-top: 6px; }
+  .calc-range { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 900; color: #fff; font-variant-numeric: tabular-nums; line-height: 1.15; }
+  .calc-note { color: #AFC0D2; font-size: .95rem; }
+  .calc-fine { margin: 4px 0 0; font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+  /* Proof */
+  .proof { padding-bottom: 88px; }
+  .proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.12); border-radius: var(--radius); overflow: hidden; }
+  .proof-stats > div { background: var(--ink-2); padding: 28px 24px; display: flex; flex-direction: column; gap: 8px; color: #AFC0D2; font-size: .95rem; }
+  .proof-stats .num { font-size: 2.3rem; font-weight: 900; line-height: 1; color: #fff; }
+
+  /* Field */
+  .field { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .field-media { position: relative; padding-bottom: 60px; }
+  .field-media img { border-radius: 18px; object-fit: cover; }
+  .f1 { width: 88%; aspect-ratio: 4/3; }
+  .f2 { position: absolute; right: 0; bottom: 0; width: 46%; aspect-ratio: 1; border: 6px solid #fff; box-shadow: var(--shadow); }
+  .ticks { list-style: none; padding: 0; margin: 24px 0 0; }
+  .ticks li { position: relative; padding-left: 30px; margin-bottom: 12px; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: .45em; width: 16px; height: 9px; border-left: 3px solid var(--gold); border-bottom: 3px solid var(--gold); transform: rotate(-45deg); }
+  .dark-ticks li::before { border-color: var(--green-bright); }
+
+  /* Journey */
+  .journey-wrap { margin-bottom: 40px; }
+  .swipe-hint { display: none; justify-content: center; align-items: center; gap: 6px; margin: 0 0 14px; font-size: .85rem; font-weight: 700; letter-spacing: .06em; color: var(--teal); }
+  .swipe-hint span { font-size: 1.1rem; }
+  .journey { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; }
+  .journey::before { content: ''; position: absolute; left: 7%; right: 7%; top: 11px; height: 3px; background: var(--brand-grad); border-radius: 2px; }
+  .journey li { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; padding-top: 34px; }
+  .journey li::before { content: ''; position: absolute; top: 3px; width: 19px; height: 19px; border-radius: 50%; background: #fff; border: 4px solid var(--teal); }
+  .j-step { font-weight: 700; color: var(--ink); line-height: 1.25; }
+  .j-cap { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+  /* Capabilities */
+  .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .cap { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; background: #fff; }
+  .cap-top { margin-bottom: 14px; }
+  .cap-verb { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--brand-grad); padding: 4px 10px; border-radius: 999px; }
+  .cap h3 { font-size: 1.05rem; }
+  .cap p { color: var(--muted); font-size: .95rem; margin: 0; }
+
+  /* Engage Predict Orchestrate */
+  .epo { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 36px; }
+  .epo-title { font-size: 1.5rem; text-align: center; margin-bottom: 24px; }
+  .epo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .epo-grid strong { display: block; font-size: 1.15rem; font-weight: 900; color: var(--blue-deep); margin-bottom: 6px; }
+  .epo-grid div:nth-child(2) strong { color: var(--teal); }
+  .epo-grid div:nth-child(3) strong { color: var(--green); }
+  .epo-grid p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+  /* CARI */
+  .cari { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
+  .phone { background: #0F2A44; border: 1px solid rgba(255,255,255,.08); border-radius: 28px; padding: 22px; max-width: 380px; justify-self: center; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,.35); }
+  .phone-bar { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 16px; }
+  .phone-bar img { border-radius: 50%; background: #fff; }
+  .msg { padding: 12px 14px; border-radius: 16px; margin-bottom: 10px; font-size: .95rem; max-width: 85%; line-height: 1.45; }
+  .msg.in { background: #1B3D5E; color: #E6EEF6; border-bottom-left-radius: 4px; }
+  .msg.out { background: var(--brand-grad); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+  .msg-meta { text-align: right; font-size: .75rem; color: #7F95AB; }
+
+  /* CTA */
+  .cta { background: var(--brand-grad); color: #fff; padding: 72px 0; }
+  .cta h2 { color: #fff; margin-bottom: .3em; }
+  .cta p { margin: 0; opacity: .9; font-size: 1.1rem; max-width: 620px; }
+  .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+
+  @media (max-width: 960px) {
+    .hero-grid, .cari, .field, .worth-grid { grid-template-columns: 1fr; gap: 40px; }
+    .caps, .proof-stats { grid-template-columns: 1fr 1fr; }
+    .epo-grid { grid-template-columns: 1fr; gap: 18px; }
+    .chip-verify { left: 12px; }
+    .chip-pay { right: 12px; }
+    .section { padding: 72px 0; }
+    /* Phones & tablets: horizontal swipe row; part of the next step peeks in so it's clear there's more */
+    .journey-wrap { position: relative; margin: 0 -24px 40px; }
+    .journey-wrap::after { content: ''; position: absolute; top: 0; right: 0; bottom: 18px; width: 48px; background: linear-gradient(90deg, rgba(244,247,250,0), var(--bg-soft)); pointer-events: none; }
+    .journey { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 24px; padding: 0 24px 18px; margin: 0; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .journey::-webkit-scrollbar { display: none; }
+    .journey::before { display: none; }
+    .journey li { flex: 0 0 38%; scroll-snap-align: start; }
+    .journey li::after { content: ''; position: absolute; top: 11px; left: 50%; width: 100%; height: 3px; background: var(--teal); z-index: -1; }
+    .journey li:last-child::after { display: none; }
+    .journey li::before { z-index: 1; }
+    .journey li { z-index: 0; }
+    .swipe-hint { display: flex; }
+  }
+  @media (max-width: 700px) {
+    .pain { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .caps, .proof-stats { grid-template-columns: 1fr; }
+    .chip-pay { display: none; }
+    .chip-verify { left: 10px; bottom: 10px; padding: 8px 12px; font-size: .8rem; }
+    .calc { padding: 22px; }
+    .hero { padding-top: 40px; }
+  }
+</style>
