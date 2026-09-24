@@ -4,35 +4,68 @@ import { capabilities, site } from '../data/site.js';
 
 const industries = ['Construction', 'Industrial Cleaning', 'Manufacturing', 'Security Services', 'Transportation & Logistics'];
 
-const pillars = [
+// PAIN -> OUTCOME. Each card names a problem the buyer has today, then what changes.
+const pains = [
   {
-    step: 'Engage',
-    title: 'Crew Experience & Retention',
-    text: 'A mobile-first experience built on offline-capable biometrics, motivation science and instant pay. Workers see their shifts, credentials, pay and recognition in one place, in their own language.',
+    pain: 'You’re paying for bad punches.',
+    detail: 'Buddy punching, off-site clock-ins and padded hours slip straight into payroll.',
+    fix: 'Every punch is face-matched, liveness-checked and tied to the job-site geofence. You pay for hours actually worked.',
+    tag: 'Verify',
   },
   {
-    step: 'Predict',
-    title: 'Real-Time Visibility',
-    text: 'Verified attendance and credential data from every site gives supervisors an early read on who’s on the job, who’s missing and where compliance risk is building.',
+    pain: 'Credentials are expiring on the job.',
+    detail: 'You find out about the lapsed card when an inspector or a client does.',
+    fix: 'Compliance Shield™ tracks every credential and warns the worker and supervisor before it expires, so unqualified people never start a shift.',
+    tag: 'Comply',
   },
   {
-    step: 'Orchestrate',
-    title: 'Coordinated, Compliant Crews',
-    text: 'Attendance, credentials, labor rules and pay work from the same worker record, so qualified people are on every site and every hour is paid correctly.',
+    pain: 'People don’t show up.',
+    detail: 'You learn about the no-show when the crew is already short.',
+    fix: 'Verified attendance from every site shows who’s on the job and who’s missing, in real time, from one screen.',
+    tag: 'Verify',
+  },
+  {
+    pain: 'Supervisors spend the day chasing people.',
+    detail: 'Calls, texts and group chats that nobody reads.',
+    fix: 'CARI™ reaches every worker by text in their own language. 95% of messages are read within 3 minutes.',
+    tag: 'Engage',
+  },
+  {
+    pain: 'Your best workers walk.',
+    detail: 'Waiting two weeks to get paid and never hearing “good job” makes the next offer easy to take.',
+    fix: 'Same-shift pay and recognition tied to real performance give crews a reason to stay.',
+    tag: 'Reward',
   },
 ];
+
+// ONE WORKER. ONE RECORD. EVERY SHIFT.
+const journey = [
+  { step: 'Onboarded', cap: 'Engage' },
+  { step: 'Credentialed', cap: 'Comply' },
+  { step: 'Shows up', cap: 'Verify' },
+  { step: 'Verified', cap: 'Verify' },
+  { step: 'Works compliant', cap: 'Comply' },
+  { step: 'Paid', cap: 'Reward' },
+  { step: 'Recognized', cap: 'Reward' },
+];
+
+const pillars = [
+  { step: 'Engage', text: 'Every worker connected by app or text, in their own language, from their first shift.' },
+  { step: 'Predict', text: 'Verified attendance and credential data give supervisors an early read on who’s missing and where risk is building.' },
+  { step: 'Orchestrate', text: 'Attendance, credentials, labor rules and pay work from the same record, so qualified people are on every site and every hour is paid right.' },
+];
 ---
-<Base title="CrewTeams — The workforce platform for frontline crews">
-  <!-- HERO -->
+<Base title="CrewTeams — Built for job sites, not desks">
+  <!-- 1. HERO: PAIN FIRST -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Powered by CARI™ agentic AI</span>
-        <h1>The workforce platform your crews would <span class="grad-text">build for themselves.</span></h1>
-        <p class="lede">One platform for the frontline workers who keep the physical economy running — fusing biometric time &amp; attendance, motivation science and agentic AI. Built for job sites, not desks.</p>
+        <span class="eyebrow">Built for job sites, not desks</span>
+        <h1>No-shows, expired credentials and bad punches <span class="grad-text">cost you every shift.</span></h1>
+        <p class="lede">CrewTeams gives every frontline worker one connected record, from onboarding to payday, so the right people show up, stay compliant and get paid right.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href={site.demoUrl}>Request a Demo</a>
-          <a class="btn btn-ghost" href="/platform/">Explore the Platform</a>
+          <a class="btn btn-ghost" href="#problems">See what it fixes</a>
         </div>
       </div>
       <div class="hero-media">
@@ -56,90 +89,48 @@ const pillars = [
     </div>
   </section>
 
-  <!-- VISION / STATS -->
-  <section class="section">
-    <div class="wrap vision">
-      <div>
-        <span class="eyebrow">Why CrewTeams</span>
-        <h2>80% of the world’s workforce still runs on spreadsheets and punch clocks.</h2>
-        <p class="lede">Frontline crews in construction, logistics, manufacturing, cleaning and security make up most of the global workforce, yet they’ve been left out of modern workforce software. CrewTeams is built for them first.</p>
-      </div>
-      <div class="stats">
-        <div class="stat"><span class="num grad-text">2.7B</span><span>frontline workers worldwide</span></div>
-        <div class="stat"><span class="num grad-text">80%</span><span>of the global workforce</span></div>
-        <div class="stat"><span class="num grad-text">95%</span><span>of CARI™ texts read within 3 minutes</span></div>
-        <div class="stat"><span class="num grad-text">0</span><span>app downloads needed to start — CARI™ works by text</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ENGAGE PREDICT ORCHESTRATE -->
-  <section class="section soft">
+  <!-- 2. PAIN -> OUTCOME -->
+  <section class="section soft" id="problems">
     <div class="wrap">
-      <div class="center">
-        <span class="eyebrow">The operating model</span>
-        <h2>Engage. Predict. Orchestrate.</h2>
-        <p class="lede">Three connected moves that turn a scattered crew into a coordinated workforce.</p>
+      <div class="head">
+        <span class="eyebrow">Sound familiar?</span>
+        <h2>The problems that cost you money this week.</h2>
+        <p class="lede">None of these are software problems until you try to fix them with spreadsheets, punch clocks and group texts.</p>
       </div>
-      <div class="pillars">
-        {pillars.map((p, i) => (
-          <article class="pillar">
-            <div class="pillar-step"><span>{String(i + 1).padStart(2, '0')}</span>{p.step}</div>
-            <h3>{p.title}</h3>
-            <p>{p.text}</p>
+      <div class="pains">
+        {pains.map((p) => (
+          <article class="pain">
+            <div class="pain-problem">
+              <h3>{p.pain}</h3>
+              <p>{p.detail}</p>
+            </div>
+            <div class="pain-fix">
+              <span class="fix-label">With CrewTeams <em>{p.tag}</em></span>
+              <p>{p.fix}</p>
+            </div>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CAPABILITIES -->
-  <section class="section" id="capabilities">
+  <!-- 3. PROOF -->
+  <section class="section dark proof">
     <div class="wrap">
-      <div class="cap-head">
-        <div>
-          <span class="eyebrow">The platform</span>
-          <h2>Four capabilities. One platform.</h2>
-        </div>
-        <p class="lede">Every capability shares the same worker record, the same rules and the same AI, so nothing falls between systems.</p>
+      <div class="head">
+        <span class="eyebrow">Not a pilot. Already running.</span>
+        <h2>Proven technology, already in the field.</h2>
+        <p class="lede">CrewTeams is built on a certified biometric time &amp; attendance platform that already runs payroll-grade attendance for frontline employers under some of the world’s most complex labor rules.</p>
       </div>
-      <div class="caps">
-        {capabilities.map((c) => (
-          <article class="cap">
-            <div class="cap-top"><span class="cap-n">{c.n}</span><span class="cap-verb">{c.verb}</span></div>
-            <h3>{c.name}</h3>
-            <p>{c.text}</p>
-          </article>
-        ))}
-      </div>
-      <div class="center" style="margin-top:40px"><a class="btn btn-ghost" href="/platform/">See the full platform</a></div>
-    </div>
-  </section>
-
-  <!-- CARI -->
-  <section class="section dark">
-    <div class="wrap cari">
-      <div>
-        <span class="eyebrow">The intelligence layer</span>
-        <h2>Meet CARI™, the agentic AI that runs alongside your crews.</h2>
-        <p class="lede">CARI answers questions from workers and supervisors, flags compliance issues before they become problems and keeps everyone informed across sites. It reaches crews by text message, so no one has to download anything to get started.</p>
-        <ul class="ticks">
-          <li>Plain-language answers for supervisors and workers</li>
-          <li>Alerts before a credential expires</li>
-          <li>Works in each worker’s language</li>
-        </ul>
-      </div>
-      <div class="phone" aria-label="Example CARI text conversation">
-        <div class="phone-bar"><img src="/img/icon.png" alt="" width="28" height="28" /> CARI™</div>
-        <div class="msg in">Morning Luis — your OSHA-10 card expires in 14 days. Reply with a photo of your renewed card and I’ll update your record.</div>
-        <div class="msg out">Will do tonight.</div>
-        <div class="msg in">Thanks. Yesterday’s shift at Site 14 is verified, and your pay is on its way.</div>
-        <div class="msg-meta">Read · 1 min</div>
+      <div class="proof-stats">
+        <div><span class="num">70,000+</span><span>frontline workers on the underlying platform today</span></div>
+        <div><span class="num">4,000</span><span>workers at the largest single employer</span></div>
+        <div><span class="num">Certified</span><span>biometric time &amp; attendance, proven under Brazil’s strict labor law</span></div>
+        <div><span class="num">AWS</span><span>enterprise cloud infrastructure with facial recognition built in</span></div>
       </div>
     </div>
   </section>
 
-  <!-- BUILT FOR THE FIELD -->
   <section class="section">
     <div class="wrap field">
       <div class="field-media">
@@ -153,19 +144,76 @@ const pillars = [
         <ul class="ticks dark-ticks">
           <li><strong>Offline biometrics</strong> — verified punches even with no signal</li>
           <li><strong>Geofenced sites</strong> — attendance tied to the actual job location</li>
-          <li><strong>Union &amp; CBA aware</strong> — rules enforced automatically</li>
-          <li><strong>Built on certified technology</strong> — proven time &amp; attendance, localized for the U.S. and Canada</li>
+          <li><strong>Union &amp; CBA aware</strong> — overtime, rest and meal-break rules enforced automatically</li>
+          <li><strong>Localized for the U.S. and Canada</strong> — built on technology already proven at scale</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- 4. PLATFORM: THE WHOLE IS BETTER THAN THE PIECES -->
+  <section class="section soft" id="platform">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">The platform</span>
+        <h2>One worker. One record. Every shift.</h2>
+        <p class="lede">Most operators stitch this together from four or five tools that don’t talk to each other. In CrewTeams it’s one connected record, so nothing falls through the gaps between systems.</p>
+      </div>
+      <ol class="journey" aria-label="A worker's journey through CrewTeams">
+        {journey.map((j) => (
+          <li><span class="j-step">{j.step}</span><span class="j-cap">{j.cap}</span></li>
+        ))}
+      </ol>
+      <div class="caps">
+        {capabilities.map((c) => (
+          <article class="cap">
+            <div class="cap-top"><span class="cap-verb">{c.verb}</span></div>
+            <h3>{c.name}</h3>
+            <p>{c.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="epo">
+        <h3 class="epo-title">Engage. Predict. Orchestrate.</h3>
+        <div class="epo-grid">
+          {pillars.map((p) => (
+            <div><strong>{p.step}</strong><p>{p.text}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CARI -->
+  <section class="section dark">
+    <div class="wrap cari">
+      <div>
+        <span class="eyebrow">The intelligence layer</span>
+        <h2>Meet CARI™, the AI your crews actually talk to.</h2>
+        <p class="lede">CARI answers questions from workers and supervisors, flags compliance issues before they become problems and keeps everyone informed across sites. It works by text message, so no one has to download anything to get started.</p>
+        <ul class="ticks">
+          <li>Plain-language answers for supervisors and workers</li>
+          <li>Alerts before a credential expires</li>
+          <li>95% of messages read within 3 minutes</li>
+          <li>Works in each worker’s language</li>
+        </ul>
+      </div>
+      <div class="phone" aria-label="Example CARI text conversation">
+        <div class="phone-bar"><img src="/img/icon.png" alt="" width="28" height="28" /> CARI™</div>
+        <div class="msg in">Morning Luis — your OSHA-10 card expires in 14 days. Reply with a photo of your renewed card and I’ll update your record.</div>
+        <div class="msg out">Will do tonight.</div>
+        <div class="msg in">Thanks. Yesterday’s shift at Site 14 is verified, and your pay is on its way.</div>
+        <div class="msg-meta">Read · 1 min</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DEMO -->
   <section class="cta">
     <div class="wrap cta-inner">
       <div>
-        <h2>See CrewTeams on your crews’ day.</h2>
-        <p>We’ll walk through a shift at one of your sites, from verified clock-in to same-shift pay.</p>
+        <h2>Bring us your three biggest crew problems.</h2>
+        <p>We’ll walk through a shift at one of your sites, from verified clock-in to same-shift pay, and show you how each one gets fixed.</p>
       </div>
       <div class="btn-row">
         <a class="btn btn-light" href={site.demoUrl}>Request a Demo</a>
@@ -179,6 +227,7 @@ const pillars = [
   /* Hero */
   .hero { padding: 72px 0 56px; background: radial-gradient(1200px 500px at 85% -10%, rgba(26,138,80,.10), transparent 60%), radial-gradient(900px 500px at -10% 10%, rgba(30,99,165,.10), transparent 60%); }
   .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.3rem); text-wrap: balance; }
   .hero-copy .lede { margin: 18px 0 30px; }
   .hero-media { position: relative; }
   .hero-media img { border-radius: 22px; box-shadow: 0 30px 60px rgba(11,31,51,.18); aspect-ratio: 4/3.4; object-fit: cover; object-position: 55% center; width: 100%; }
@@ -196,39 +245,65 @@ const pillars = [
   .industries ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: center; }
   .industries li { font-weight: 700; color: var(--ink); }
 
-  /* Vision */
-  .vision { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .stat { background: var(--bg-soft); border-radius: var(--radius); padding: 26px 22px; display: flex; flex-direction: column; gap: 4px; color: var(--muted); font-size: .95rem; }
-  .num { font-size: 2.6rem; font-weight: 900; line-height: 1; }
+  .head { max-width: 760px; margin-bottom: 44px; }
+  .head.center { margin-left: auto; margin-right: auto; }
+  .head h2 { text-wrap: balance; }
 
-  /* Pillars */
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-  .pillar { background: #fff; border-radius: var(--radius); padding: 32px 28px; box-shadow: var(--shadow); border-top: 4px solid; border-image: var(--brand-grad) 1; }
-  .pillar-step { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.5rem; color: var(--blue-deep); margin-bottom: 12px; }
-  .pillar:nth-child(2) .pillar-step { color: var(--teal); }
-  .pillar:nth-child(3) .pillar-step { color: var(--green); }
-  .pillar-step span { font-size: .8rem; font-weight: 700; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; }
-  .pillar p { color: var(--muted); margin: 0; }
+  /* Pain -> outcome */
+  .pains { display: grid; gap: 14px; }
+  .pain { display: grid; grid-template-columns: 1fr 1.15fr; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 10px rgba(11,31,51,.05); }
+  .pain-problem { padding: 24px 28px; border-left: 4px solid #C8553D; }
+  .pain-problem h3 { font-size: 1.2rem; margin-bottom: 6px; }
+  .pain-problem p { margin: 0; color: var(--muted); font-size: .97rem; }
+  .pain-fix { padding: 24px 28px; background: #EEF6F2; }
+  .pain-fix p { margin: 0; color: var(--text); }
+  .fix-label { display: flex; align-items: center; gap: 10px; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+  .fix-label em { font-style: normal; color: #fff; background: var(--brand-grad); padding: 2px 9px; border-radius: 999px; letter-spacing: .1em; }
 
-  /* Capabilities */
-  .cap-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 40px; }
-  .cap-head .lede { margin: 0; }
-  .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .cap { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; transition: border-color .15s, box-shadow .15s, transform .15s; background: #fff; }
-  .cap:hover { border-color: transparent; box-shadow: var(--shadow); transform: translateY(-2px); }
-  .cap-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .cap-n { font-weight: 900; font-size: 1.4rem; color: var(--line); }
-  .cap-verb { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--brand-grad); padding: 4px 10px; border-radius: 999px; }
-  .cap h3 { font-size: 1.05rem; }
-  .cap p { color: var(--muted); font-size: .95rem; margin: 0; }
+  /* Proof */
+  .proof { padding-bottom: 88px; }
+  .proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.12); border-radius: var(--radius); overflow: hidden; }
+  .proof-stats > div { background: var(--ink-2); padding: 28px 24px; display: flex; flex-direction: column; gap: 8px; color: #AFC0D2; font-size: .95rem; }
+  .proof-stats .num { font-size: 2.3rem; font-weight: 900; line-height: 1; color: #fff; }
 
-  /* CARI */
-  .cari { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
+  /* Field */
+  .field { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .field-media { position: relative; padding-bottom: 60px; }
+  .field-media img { border-radius: 18px; object-fit: cover; }
+  .f1 { width: 88%; aspect-ratio: 4/3; }
+  .f2 { position: absolute; right: 0; bottom: 0; width: 46%; aspect-ratio: 1; border: 6px solid #fff; box-shadow: var(--shadow); }
   .ticks { list-style: none; padding: 0; margin: 24px 0 0; }
   .ticks li { position: relative; padding-left: 30px; margin-bottom: 12px; }
   .ticks li::before { content: ''; position: absolute; left: 0; top: .45em; width: 16px; height: 9px; border-left: 3px solid var(--gold); border-bottom: 3px solid var(--gold); transform: rotate(-45deg); }
   .dark-ticks li::before { border-color: var(--green-bright); }
+
+  /* Journey */
+  .journey { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; }
+  .journey::before { content: ''; position: absolute; left: 7%; right: 7%; top: 11px; height: 3px; background: var(--brand-grad); border-radius: 2px; }
+  .journey li { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; padding-top: 34px; }
+  .journey li::before { content: ''; position: absolute; top: 3px; width: 19px; height: 19px; border-radius: 50%; background: #fff; border: 4px solid var(--teal); }
+  .j-step { font-weight: 700; color: var(--ink); line-height: 1.25; }
+  .j-cap { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+  /* Capabilities */
+  .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .cap { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; background: #fff; }
+  .cap-top { margin-bottom: 14px; }
+  .cap-verb { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--brand-grad); padding: 4px 10px; border-radius: 999px; }
+  .cap h3 { font-size: 1.05rem; }
+  .cap p { color: var(--muted); font-size: .95rem; margin: 0; }
+
+  /* Engage Predict Orchestrate */
+  .epo { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 36px; }
+  .epo-title { font-size: 1.5rem; text-align: center; margin-bottom: 24px; }
+  .epo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .epo-grid strong { display: block; font-size: 1.15rem; font-weight: 900; color: var(--blue-deep); margin-bottom: 6px; }
+  .epo-grid div:nth-child(2) strong { color: var(--teal); }
+  .epo-grid div:nth-child(3) strong { color: var(--green); }
+  .epo-grid p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+  /* CARI */
+  .cari { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
   .phone { background: #0F2A44; border: 1px solid rgba(255,255,255,.08); border-radius: 28px; padding: 22px; max-width: 380px; justify-self: center; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,.35); }
   .phone-bar { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 16px; }
   .phone-bar img { border-radius: 50%; background: #fff; }
@@ -237,31 +312,29 @@ const pillars = [
   .msg.out { background: var(--brand-grad); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
   .msg-meta { text-align: right; font-size: .75rem; color: #7F95AB; }
 
-  /* Field */
-  .field { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-  .field-media { position: relative; padding-bottom: 60px; }
-  .field-media img { border-radius: 18px; object-fit: cover; }
-  .f1 { width: 88%; aspect-ratio: 4/3; }
-  .f2 { position: absolute; right: 0; bottom: 0; width: 46%; aspect-ratio: 1; border: 6px solid #fff; box-shadow: var(--shadow); }
-
   /* CTA */
   .cta { background: var(--brand-grad); color: #fff; padding: 72px 0; }
   .cta h2 { color: #fff; margin-bottom: .3em; }
-  .cta p { margin: 0; opacity: .9; font-size: 1.1rem; }
+  .cta p { margin: 0; opacity: .9; font-size: 1.1rem; max-width: 620px; }
   .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
 
   @media (max-width: 960px) {
-    .hero-grid, .vision, .cari, .field, .cap-head { grid-template-columns: 1fr; gap: 40px; }
-    .pillars { grid-template-columns: 1fr; }
-    .caps { grid-template-columns: 1fr 1fr; }
+    .hero-grid, .cari, .field { grid-template-columns: 1fr; gap: 40px; }
+    .caps, .proof-stats { grid-template-columns: 1fr 1fr; }
+    .epo-grid { grid-template-columns: 1fr; gap: 18px; }
     .chip-verify { left: 12px; }
     .chip-pay { right: 12px; }
     .section { padding: 72px 0; }
+    .journey { grid-template-columns: 1fr; gap: 0; max-width: 360px; margin-left: auto; margin-right: auto; }
+    .journey::before { left: 9px; right: auto; top: 12px; bottom: 12px; width: 3px; height: auto; background: linear-gradient(180deg, var(--blue-deep), var(--teal), var(--green-bright)); }
+    .journey li { flex-direction: row; align-items: baseline; text-align: left; gap: 12px; padding: 8px 0 8px 36px; }
+    .journey li::before { top: 11px; left: 0; }
+  }
+  @media (max-width: 700px) {
+    .pain { grid-template-columns: 1fr; }
   }
   @media (max-width: 560px) {
-    .caps { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .num { font-size: 2rem; }
+    .caps, .proof-stats { grid-template-columns: 1fr; }
     .chip-pay { display: none; }
     .chip-verify { left: 10px; bottom: 10px; padding: 8px 12px; font-size: .8rem; }
     .hero { padding-top: 40px; }
