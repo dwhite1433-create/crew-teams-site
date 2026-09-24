@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
     <div class="footer-grid">
       <div>
         <img class="footer-logo" src="/img/logo-footer-white.png" alt="CrewTeams — Engage. Predict. Orchestrate." />
-        <p>The workforce platform for the crews who keep the physical economy running.</p>
+        <p>{site.positioning}</p>
         <p><a href={`mailto:${site.email}`}>{site.email}</a><br />{site.address}</p>
       </div>
       {nav.map((col) => (

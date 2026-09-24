@@ -7,6 +7,7 @@ export const site = {
   email: 'info@crewteams.ai',
   address: '402 Seville Avenue, Newport Beach, CA 92661',
   tagline: 'Engage. Predict. Orchestrate.',
+  positioning: 'The workforce platform for the crews who keep the physical economy running.',
   demoUrl: '/get-started/',
   loginUrl: '#login',
 };

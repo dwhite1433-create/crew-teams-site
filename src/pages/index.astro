@@ -60,9 +60,9 @@ const pillars = [
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Built for job sites, not desks</span>
+        <p class="kicker">{site.positioning}</p>
         <h1>No-shows, expired credentials and bad punches <span class="grad-text">cost you every shift.</span></h1>
-        <p class="lede">CrewTeams gives every frontline worker one connected record, from onboarding to payday, so the right people show up, stay compliant and get paid right.</p>
+        <p class="lede"><strong>Built for job sites, not desks.</strong> CrewTeams puts every worker’s verified shifts, credentials and pay in one place, from onboarding to payday, so the right people show up, stay compliant and get paid right.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href={site.demoUrl}>Request a Demo</a>
           <a class="btn btn-ghost" href="#problems">See what it fixes</a>
@@ -114,6 +114,30 @@ const pillars = [
     </div>
   </section>
 
+  <!-- 2b. SIZE THE PROBLEM -->
+  <section class="section worth" id="savings">
+    <div class="wrap worth-grid">
+      <div>
+        <span class="eyebrow">What it’s worth</span>
+        <h2>Employers on our platform save <span class="grad-text">2–5% of total labor cost.</span></h2>
+        <p class="lede">The savings come from the problems above: hours you no longer pay for, overtime and compliance penalties you avoid, and fewer people to replace when your best workers stay.</p>
+      </div>
+      <div class="calc" aria-labelledby="calc-title">
+        <h3 id="calc-title">What 2–5% looks like for you</h3>
+        <label for="labor">Your annual frontline labor cost</label>
+        <div class="calc-input">
+          <span>$</span>
+          <input id="labor" type="text" inputmode="numeric" value="25,000,000" autocomplete="off" />
+        </div>
+        <div class="calc-out" aria-live="polite">
+          <span class="calc-range"><span id="lo">$500,000</span> – <span id="hi">$1,250,000</span></span>
+          <span class="calc-note">potential savings every year</span>
+        </div>
+        <p class="calc-fine">Based on results reported by employers on the underlying platform. Your results depend on workforce size, labor rules and how you run time and attendance today.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- 3. PROOF -->
   <section class="section dark proof">
     <div class="wrap">
@@ -159,11 +183,14 @@ const pillars = [
         <h2>One worker. One record. Every shift.</h2>
         <p class="lede">Most operators stitch this together from four or five tools that don’t talk to each other. In CrewTeams it’s one connected record, so nothing falls through the gaps between systems.</p>
       </div>
+      <p class="swipe-hint" aria-hidden="true">Swipe to follow one worker’s shift <span>→</span></p>
+      <div class="journey-wrap">
       <ol class="journey" aria-label="A worker's journey through CrewTeams">
         {journey.map((j) => (
           <li><span class="j-step">{j.step}</span><span class="j-cap">{j.cap}</span></li>
         ))}
       </ol>
+      </div>
       <div class="caps">
         {capabilities.map((c) => (
           <article class="cap">
@@ -221,7 +248,22 @@ const pillars = [
       </div>
     </div>
   </section>
+  <script>
+  const input = document.getElementById('labor');
+  const lo = document.getElementById('lo');
+  const hi = document.getElementById('hi');
+  const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
+  const update = () => {
+    const digits = (input.value || '').replace(/[^0-9]/g, '');
+    const n = Number(digits) || 0;
+    input.value = digits ? n.toLocaleString('en-US') : '';
+    lo.textContent = fmt(n * 0.02);
+    hi.textContent = fmt(n * 0.05);
+  };
+  input?.addEventListener('input', update);
+  </script>
 </Base>
+
 
 <style>
   /* Hero */
@@ -229,6 +271,8 @@ const pillars = [
   .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
   .hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.3rem); text-wrap: balance; }
   .hero-copy .lede { margin: 18px 0 30px; }
+  .hero-copy .lede strong { color: var(--ink); font-weight: 700; }
+  .kicker { font-size: clamp(1.1rem, 1.6vw, 1.3rem); font-weight: 700; line-height: 1.35; color: var(--teal); margin: 0 0 18px; padding-left: 14px; border-left: 4px solid var(--gold); text-wrap: balance; }
   .hero-media { position: relative; }
   .hero-media img { border-radius: 22px; box-shadow: 0 30px 60px rgba(11,31,51,.18); aspect-ratio: 4/3.4; object-fit: cover; object-position: 55% center; width: 100%; }
   .chip { position: absolute; background: #fff; border-radius: 14px; box-shadow: var(--shadow); padding: 12px 16px; display: flex; gap: 10px; align-items: center; font-size: .9rem; }
@@ -260,6 +304,22 @@ const pillars = [
   .fix-label { display: flex; align-items: center; gap: 10px; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
   .fix-label em { font-style: normal; color: #fff; background: var(--brand-grad); padding: 2px 9px; border-radius: 999px; letter-spacing: .1em; }
 
+
+  /* Size the problem */
+  .worth-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+  .worth h2 { text-wrap: balance; }
+  .calc { background: var(--bg-soft); border-radius: 20px; padding: 32px; display: grid; gap: 12px; border: 1px solid var(--line); }
+  .calc h3 { margin: 0 0 4px; }
+  .calc label { font-weight: 500; font-size: .95rem; color: var(--muted); }
+  .calc-input { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; }
+  .calc-input:focus-within { outline: 2px solid var(--teal); border-color: transparent; }
+  .calc-input span { font-size: 1.4rem; font-weight: 700; color: var(--muted); }
+  .calc-input input { font: inherit; font-size: 1.4rem; font-weight: 700; color: var(--ink); border: 0; outline: 0; padding: 12px 0; width: 100%; background: transparent; font-variant-numeric: tabular-nums; }
+  .calc-out { background: var(--ink); border-radius: 14px; padding: 20px 22px; display: grid; gap: 4px; margin-top: 6px; }
+  .calc-range { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 900; color: #fff; font-variant-numeric: tabular-nums; line-height: 1.15; }
+  .calc-note { color: #AFC0D2; font-size: .95rem; }
+  .calc-fine { margin: 4px 0 0; font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
   /* Proof */
   .proof { padding-bottom: 88px; }
   .proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.12); border-radius: var(--radius); overflow: hidden; }
@@ -278,7 +338,10 @@ const pillars = [
   .dark-ticks li::before { border-color: var(--green-bright); }
 
   /* Journey */
-  .journey { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; }
+  .journey-wrap { margin-bottom: 40px; }
+  .swipe-hint { display: none; justify-content: center; align-items: center; gap: 6px; margin: 0 0 14px; font-size: .85rem; font-weight: 700; letter-spacing: .06em; color: var(--teal); }
+  .swipe-hint span { font-size: 1.1rem; }
+  .journey { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; }
   .journey::before { content: ''; position: absolute; left: 7%; right: 7%; top: 11px; height: 3px; background: var(--brand-grad); border-radius: 2px; }
   .journey li { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; padding-top: 34px; }
   .journey li::before { content: ''; position: absolute; top: 3px; width: 19px; height: 19px; border-radius: 50%; background: #fff; border: 4px solid var(--teal); }
@@ -319,16 +382,24 @@ const pillars = [
   .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
 
   @media (max-width: 960px) {
-    .hero-grid, .cari, .field { grid-template-columns: 1fr; gap: 40px; }
+    .hero-grid, .cari, .field, .worth-grid { grid-template-columns: 1fr; gap: 40px; }
     .caps, .proof-stats { grid-template-columns: 1fr 1fr; }
     .epo-grid { grid-template-columns: 1fr; gap: 18px; }
     .chip-verify { left: 12px; }
     .chip-pay { right: 12px; }
     .section { padding: 72px 0; }
-    .journey { grid-template-columns: 1fr; gap: 0; max-width: 360px; margin-left: auto; margin-right: auto; }
-    .journey::before { left: 9px; right: auto; top: 12px; bottom: 12px; width: 3px; height: auto; background: linear-gradient(180deg, var(--blue-deep), var(--teal), var(--green-bright)); }
-    .journey li { flex-direction: row; align-items: baseline; text-align: left; gap: 12px; padding: 8px 0 8px 36px; }
-    .journey li::before { top: 11px; left: 0; }
+    /* Phones & tablets: horizontal swipe row; part of the next step peeks in so it's clear there's more */
+    .journey-wrap { position: relative; margin: 0 -24px 40px; }
+    .journey-wrap::after { content: ''; position: absolute; top: 0; right: 0; bottom: 18px; width: 48px; background: linear-gradient(90deg, rgba(244,247,250,0), var(--bg-soft)); pointer-events: none; }
+    .journey { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 24px; padding: 0 24px 18px; margin: 0; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .journey::-webkit-scrollbar { display: none; }
+    .journey::before { display: none; }
+    .journey li { flex: 0 0 38%; scroll-snap-align: start; }
+    .journey li::after { content: ''; position: absolute; top: 11px; left: 50%; width: 100%; height: 3px; background: var(--teal); z-index: -1; }
+    .journey li:last-child::after { display: none; }
+    .journey li::before { z-index: 1; }
+    .journey li { z-index: 0; }
+    .swipe-hint { display: flex; }
   }
   @media (max-width: 700px) {
     .pain { grid-template-columns: 1fr; }
@@ -337,6 +408,7 @@ const pillars = [
     .caps, .proof-stats { grid-template-columns: 1fr; }
     .chip-pay { display: none; }
     .chip-verify { left: 10px; bottom: 10px; padding: 8px 12px; font-size: .8rem; }
+    .calc { padding: 22px; }
     .hero { padding-top: 40px; }
   }
 </style>
