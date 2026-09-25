@@ -115,7 +115,7 @@ p { margin: 0 0 1em; }
 
 /* Footer */
 .site-footer { background: var(--ink); color: #AFC0D2; padding: 72px 0 32px; font-size: .95rem; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; }
 .footer-grid h4 a { color: #fff; }
 .footer-grid h4 { color: #fff; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 14px; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; }

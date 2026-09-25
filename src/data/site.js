@@ -26,20 +26,10 @@ export const nav = [
     ],
   },
   {
-    label: 'Industries',
-    href: '/industries/',
-    children: [
-      { label: 'Construction', href: '/industries/construction/' },
-      { label: 'Industrial Cleaning', href: '/industries/industrial-cleaning/' },
-      { label: 'Manufacturing', href: '/industries/manufacturing/' },
-      { label: 'Security Services', href: '/industries/security/' },
-      { label: 'Transportation & Logistics', href: '/industries/transportation/' },
-    ],
-  },
-  {
     label: 'Company',
     href: '/company/',
     children: [
+      { label: 'Industries We Serve', href: '/company/industries/' },
       { label: 'Partners', href: '/company/partners/' },
       { label: 'The Science of Motivation', href: '/company/science/' },
     ],

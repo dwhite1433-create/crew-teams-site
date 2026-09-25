@@ -1,0 +1,188 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageCTA from '../../components/PageCTA.astro';
+
+// Employers running on the technology behind CrewTeams, grouped by sector.
+const L = (file, name) => ({ src: `/img/customers/${file}.png`, name });
+const logoGroups = [
+  { label: 'Construction & building', logos: [L('tecnisa', 'Tecnisa'), L('helbor', 'Helbor'), L('tigre', 'Tigre'), L('dutra', 'Dutra Máquinas')] },
+  { label: 'Manufacturing & industrial', logos: [L('akzonobel', 'AkzoNobel'), L('abb', 'ABB'), L('carrier', 'Carrier'), L('toshiba', 'Toshiba'), L('scjohnson', 'SC Johnson'), L('haribo', 'Haribo'), L('endress', 'Endress+Hauser'), L('spx', 'SPX'), L('imcd', 'IMCD')] },
+  { label: 'Transportation & logistics', logos: [L('jsl', 'JSL'), L('idlogistics', 'ID Logistics')] },
+  { label: 'Energy, utilities & agribusiness', logos: [L('invenergy', 'Invenergy'), L('trident', 'Trident Energy'), L('compesa', 'Compesa'), L('olam', 'Olam')] },
+  { label: 'And global brands across services', logos: [L('disney', 'Disney'), L('fox', 'FOX'), L('espn', 'ESPN'), L('aon', 'Aon'), L('nubank', 'Nubank'), L('prada', 'Prada'), L('bentley', 'Bentley')] },
+];
+
+const industries = [
+  {
+    name: 'Construction',
+    reality: 'Crews move between job sites, subcontractors come and go, and one expired certification can shut a site down.',
+    matters: ['OSHA-10 / OSHA-30, forklift, scaffold and confined-space credentials', 'Geofenced punches on every job site', 'Union and prevailing-wage rules'],
+  },
+  {
+    name: 'Industrial Cleaning',
+    reality: 'Night shifts, many client sites and a multilingual workforce make it hard to know who actually showed up.',
+    matters: ['Verified attendance at each client site', 'Chemical-handling and respirator fit-test tracking', 'Instructions in every worker’s language'],
+  },
+  {
+    name: 'Manufacturing',
+    reality: 'Shift coverage, overtime and safety training decide whether a line runs, and at what cost.',
+    matters: ['Face-verified clock-in on shared devices at the plant', 'Equipment certifications and safety inductions', 'Overtime, break and CBA rules applied automatically'],
+  },
+  {
+    name: 'Security Services',
+    reality: 'Guards work alone at client sites, licenses expire, and clients want proof the post was covered.',
+    matters: ['State guard licenses and firearms permits', 'Proof of presence at every post', 'Alerts when a guard hasn’t clocked in'],
+  },
+  {
+    name: 'Transportation & Logistics',
+    reality: 'Drivers and warehouse crews work under strict hours-of-service and labor rules, across many locations.',
+    matters: ['CDL, DOT medical card and hazmat endorsements', 'Driver and warehouse hours under the right rules', 'Verified time flowing into payroll and ERP'],
+  },
+];
+
+const cases = [
+  { logo: L('jsl', 'JSL'), sector: 'Transportation & logistics', title: 'Brazil’s largest road logistics and transportation company', body: 'Manages complex blue-collar operations and strict truck-driver labor laws with facial-recognition totems and deep SAP integration.', stat: '12,500', statLabel: 'employees today, scaling to tens of thousands more' },
+  { logo: L('akzonobel', 'AkzoNobel'), sector: 'Manufacturing', title: 'A global paints and coatings leader in 150+ countries', body: 'Time & attendance for blue-collar staff on fixed tablets and totems, using facial recognition, QR codes, single sign-on and integrations.', stat: '~3,000', statLabel: 'employees in 2 countries, expanding to 20' },
+  { logo: L('abb', 'ABB'), sector: 'Electrification & automation', title: 'A 140-year-old global technology leader', body: 'Running on the platform across two countries, with expansion into broader global territories underway.', stat: '~3,000', statLabel: 'employees in 2 countries' },
+];
+---
+<Base title="Industries We Serve | CrewTeams" description="CrewTeams is built for construction, industrial cleaning, manufacturing, security and transportation crews, on technology already trusted by global employers.">
+
+  <!-- HERO -->
+  <section class="ind-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/company/">Company</a> <span>/</span> Industries We Serve</p>
+      <span class="eyebrow">Industries we serve</span>
+      <h1>Built for the crews who <span class="grad-text">build, clean, make, guard and move.</span></h1>
+      <p class="lede">Every industry has its own credentials, labor rules and job-site realities. CrewTeams is built around them, on technology already trusted by some of the world’s largest employers.</p>
+    </div>
+  </section>
+
+  <!-- LOGO WALL -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">Already in the field</span>
+        <h2>Employers running our Time &amp; Attendance.</h2>
+      </div>
+      <div class="groups">
+        {logoGroups.map((g) => (
+          <div class="group">
+            <p class="g-label">{g.label}</p>
+            <ul class="logos">
+              {g.logos.map((l) => <li><img src={l.src} alt={l.name} loading="lazy" /></li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Built for your industry</span>
+        <h2>Different crews. Different rules. One platform.</h2>
+      </div>
+      <div class="inds">
+        {industries.map((i) => (
+          <article class="ind">
+            <h3>{i.name}</h3>
+            <p class="reality">{i.reality}</p>
+            <p class="m-label">What CrewTeams handles</p>
+            <ul class="ticks">{i.matters.map((m) => <li>{m}</li>)}</ul>
+          </article>
+        ))}
+        <a class="ind ind-cta" href="/get-started/">
+          <h3>Don’t see your industry?</h3>
+          <p>If your people work with their hands all day, are on their feet, on a job site or on the road, we’ve got you. CrewTeams was built for them. Let’s talk.</p>
+          <span class="go">Request a Demo →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE SNAPSHOTS -->
+  <section class="section dark">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Proven at scale</span>
+        <h2>Complex operations already run on it.</h2>
+        <p class="lede">A few of the employers using the technology behind CrewTeams today.</p>
+      </div>
+      <div class="cases">
+        {cases.map((c) => (
+          <article class="case">
+            <div class="case-logo"><img src={c.logo.src} alt={c.logo.name} loading="lazy" /></div>
+            <p class="sector">{c.sector}</p>
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+            <div class="case-stat"><span class="num">{c.stat}</span><span>{c.statLabel}</span></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PageCTA title="See CrewTeams in your industry." text="Bring us your credentials, your labor rules and your toughest site. We’ll show you how CrewTeams handles them." />
+</Base>
+
+<style>
+  .ind-hero { padding: 56px 0 56px; background: radial-gradient(1000px 420px at 90% -20%, rgba(26,138,80,.10), transparent 60%), radial-gradient(800px 420px at -10% 0%, rgba(30,99,165,.10), transparent 60%); }
+  .ind-hero h1 { max-width: 22ch; font-size: clamp(2.1rem, 4.4vw, 3.4rem); text-wrap: balance; }
+  .ind-hero .lede { margin-top: 18px; }
+  .crumb { font-size: .9rem; color: var(--muted); margin: 0 0 16px; }
+  .crumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .crumb span { margin: 0 6px; color: var(--line); }
+
+  .head { max-width: 760px; margin-bottom: 40px; }
+  .head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .head h2 { text-wrap: balance; }
+
+  /* Logo wall */
+  .groups { display: grid; gap: 14px; }
+  .group { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; display: grid; grid-template-columns: 14rem 1fr; gap: 20px; align-items: center; }
+  .g-label { margin: 0; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .logos { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; }
+  .logos li { height: 40px; display: flex; align-items: center; }
+  .logos img { height: 32px; max-width: 132px; width: auto; object-fit: contain; filter: grayscale(1); opacity: .75; transition: filter .2s, opacity .2s; }
+  .logos li:hover img { filter: none; opacity: 1; }
+
+  /* Industries */
+  .inds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .ind { border: 1px solid var(--line); border-radius: 18px; padding: 26px 24px; border-top: 4px solid var(--teal); display: flex; flex-direction: column; }
+  .ind h3 { font-size: 1.25rem; }
+  .reality { color: var(--muted); }
+  .m-label { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin: 6px 0 10px; }
+  .ticks { list-style: none; padding: 0; margin: 0; }
+  .ticks li { position: relative; padding-left: 28px; margin-bottom: 10px; font-size: .95rem; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: .45em; width: 15px; height: 8px; border-left: 3px solid var(--green-bright); border-bottom: 3px solid var(--green-bright); transform: rotate(-45deg); }
+  .ind-cta { text-decoration: none; color: inherit; background: var(--bg-soft); border-top-color: var(--gold); transition: box-shadow .15s, transform .15s; }
+  .ind-cta:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .ind-cta p { color: var(--muted); }
+  .go { margin-top: auto; font-weight: 700; color: var(--blue); }
+
+  /* Cases */
+  .cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .case { background: var(--ink-2); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; }
+  .case-logo { background: #fff; border-radius: 12px; height: 72px; display: grid; place-items: center; margin-bottom: 18px; }
+  .case-logo img { height: 40px; max-width: 170px; width: auto; object-fit: contain; }
+  .sector { margin: 0 0 6px; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+  .case h3 { font-size: 1.1rem; text-wrap: balance; }
+  .case p { color: #AFC0D2; font-size: .95rem; }
+  .case-stat { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.1); display: grid; gap: 2px; color: #AFC0D2; font-size: .9rem; }
+  .case-stat .num { font-size: 2rem; font-weight: 900; color: #fff; line-height: 1.1; }
+
+  @media (max-width: 960px) {
+    .inds, .cases { grid-template-columns: 1fr 1fr; }
+    .group { grid-template-columns: 1fr; gap: 10px; }
+    .section { padding: 72px 0; }
+  }
+  @media (max-width: 600px) {
+    .inds, .cases { grid-template-columns: 1fr; }
+    .logos { gap: 12px 22px; }
+    .logos img { height: 26px; max-width: 104px; }
+    .ind-hero { padding-top: 32px; }
+  }
+</style>
