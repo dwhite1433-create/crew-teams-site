@@ -1,0 +1,153 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site.js';
+
+// Technology partners are described by what they bring, not named, per the white-label approach.
+const tech = [
+  { area: 'Payments & motivation science', d: 'Same-shift pay and recognition, built with specialists in frontline pay and the science of what keeps workers engaged.', cap: 'Reward' },
+  { area: 'Cloud infrastructure', d: 'Enterprise cloud infrastructure on AWS, with facial recognition built in.', cap: 'AWS' },
+];
+
+const types = [
+  { t: 'HR, payroll & workforce software', d: 'Add verified time, credential compliance and same-shift pay for your frontline customers without building it yourself.' },
+  { t: 'Staffing & workforce solutions firms', d: 'Give your clients verified hours and compliant, credentialed workers on every assignment.' },
+  { t: 'Industry & trade associations', d: 'Bring members a platform built for their crews, their credentials and their labor rules.' },
+  { t: 'Consultants & systems integrators', d: 'Deliver frontline workforce projects with a platform that connects to the systems your clients already run.' },
+];
+
+const gets = ['Referral and resale options', 'Joint go-to-market and co-selling', 'Integration support through open APIs', 'A platform your customers’ crews will actually use'];
+---
+<Base title="Partners | CrewTeams" description="The technology partners behind CrewTeams, and how HR and payroll providers, staffing firms, associations and integrators can partner with us.">
+
+  <!-- HERO -->
+  <section class="pa-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/company/">Company</a> <span>/</span> Partners</p>
+      <span class="eyebrow">Partners</span>
+      <h1>The right specialists. <span class="grad-text">One platform for your crews.</span></h1>
+      <p class="lede">Where a specialist does it best, CrewTeams works with them, from frontline pay and motivation science to enterprise cloud infrastructure. We also work with the firms that bring CrewTeams to their own customers.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#become">Become a partner</a>
+        <a class="btn btn-ghost" href="#tech">See the technology partners</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY PARTNERS -->
+  <section class="section soft" id="tech">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Technology partners</span>
+        <h2>What our partners bring to the platform.</h2>
+        <p class="lede">Our technology partners specialize in one thing and do it exceptionally well. CrewTeams brings their work together in one place for every worker.</p>
+      </div>
+      <div class="tech">
+        {tech.map((t) => (
+          <article class="tech-card">
+            <span class="tag">{t.cap}</span>
+            <h3>{t.area}</h3>
+            <p>{t.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER PROGRAM -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Partner with CrewTeams</span>
+        <h2>Bring CrewTeams to the frontline employers you already serve.</h2>
+      </div>
+      <div class="types">
+        {types.map((t) => <article class="type"><h3>{t.t}</h3><p>{t.d}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- BECOME A PARTNER -->
+  <section class="section dark" id="become">
+    <div class="wrap become">
+      <div>
+        <span class="eyebrow">Become a partner</span>
+        <h2>Let’s talk about working together.</h2>
+        <p class="lede">Tell us a little about your company and the frontline employers you work with. We’ll follow up within one business day.</p>
+        <p class="gets-title">What partners get</p>
+        <ul class="ticks">{gets.map((g) => <li>{g}</li>)}</ul>
+        <p class="alt">Prefer email? <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+      <form class="p-form" name="partner-inquiry" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company-url">
+        <input type="hidden" name="form-name" value="partner-inquiry" />
+        <p class="hp"><label>Leave blank <input name="company-url" /></label></p>
+        <div class="row">
+          <label for="p-first">First name<input id="p-first" name="first-name" required autocomplete="given-name" /></label>
+          <label for="p-last">Last name<input id="p-last" name="last-name" required autocomplete="family-name" /></label>
+        </div>
+        <label for="p-email">Work email<input id="p-email" name="email" type="email" required autocomplete="email" /></label>
+        <label for="p-company">Company<input id="p-company" name="company" required autocomplete="organization" /></label>
+        <label for="p-type">Partner type
+          <select id="p-type" name="partner-type" required>
+            <option value="">Select…</option>
+            {types.map((t) => <option>{t.t}</option>)}
+            <option>Technology partner</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label for="p-notes">How would you like to work together?<textarea id="p-notes" name="message" rows="4"></textarea></label>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pa-hero { padding: 56px 0 56px; background: radial-gradient(1000px 420px at 90% -20%, rgba(26,138,80,.10), transparent 60%), radial-gradient(800px 420px at -10% 0%, rgba(30,99,165,.10), transparent 60%); }
+  .pa-hero h1 { max-width: 22ch; font-size: clamp(2.1rem, 4.4vw, 3.3rem); text-wrap: balance; }
+  .pa-hero .lede { margin: 18px 0 28px; }
+  .crumb { font-size: .9rem; color: var(--muted); margin: 0 0 16px; }
+  .crumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .crumb span { margin: 0 6px; color: var(--line); }
+
+  .head { max-width: 760px; margin-bottom: 40px; }
+  .head h2 { text-wrap: balance; }
+
+  .tech { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 900px; }
+  .tech-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
+  .tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--brand-grad); padding: 3px 10px; border-radius: 999px; margin-bottom: 14px; }
+  .tech-card h3 { font-size: 1.1rem; }
+  .tech-card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .type { border-radius: var(--radius); padding: 26px 22px; border: 1px solid var(--line); border-top: 4px solid var(--teal); }
+  .type h3 { font-size: 1.1rem; }
+  .type p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .become { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .become h2 { text-wrap: balance; }
+  .gets-title { margin: 28px 0 8px; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+  .ticks { list-style: none; padding: 0; margin: 0; }
+  .ticks li { position: relative; padding-left: 30px; margin-bottom: 12px; color: #D5DEE8; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: .45em; width: 16px; height: 9px; border-left: 3px solid var(--green-bright); border-bottom: 3px solid var(--green-bright); transform: rotate(-45deg); }
+  .alt { color: #AFC0D2; margin-top: 20px; }
+  .alt a { color: #fff; }
+
+  .p-form { background: #fff; border-radius: var(--radius); padding: 32px; display: grid; gap: 16px; box-shadow: 0 30px 60px rgba(0,0,0,.25); }
+  .p-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .p-form label { display: grid; gap: 6px; font-weight: 500; font-size: .95rem; color: var(--ink); }
+  .p-form input, .p-form select, .p-form textarea { font: inherit; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--text); width: 100%; }
+  .p-form input:focus, .p-form select:focus, .p-form textarea:focus { outline: 2px solid var(--teal); border-color: transparent; }
+  .p-form button { justify-content: center; border: 0; cursor: pointer; }
+  .hp { display: none; }
+
+  @media (max-width: 960px) {
+    .types { grid-template-columns: 1fr 1fr; }
+    .become { grid-template-columns: 1fr; gap: 36px; }
+    .section { padding: 72px 0; }
+  }
+  @media (max-width: 560px) {
+    .tech, .types, .p-form .row { grid-template-columns: 1fr; }
+    .p-form { padding: 22px; }
+    .pa-hero { padding-top: 32px; }
+  }
+</style>

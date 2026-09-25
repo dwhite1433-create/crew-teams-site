@@ -40,7 +40,6 @@ export const nav = [
     label: 'Company',
     href: '/company/',
     children: [
-      { label: 'About Us', href: '/company/' },
       { label: 'Partners', href: '/company/partners/' },
       { label: 'The Science of Motivation', href: '/company/science/' },
     ],

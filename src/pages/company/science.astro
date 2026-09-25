@@ -1,0 +1,147 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageCTA from '../../components/PageCTA.astro';
+
+// Each principle is paired with how CrewTeams applies it.
+const principles = [
+  { t: 'Rewards work best when they’re immediate', d: 'The longer the gap between effort and reward, the weaker the link. A paycheck two weeks later doesn’t feel connected to today’s shift.', how: 'Same-shift pay as soon as a shift is verified.' },
+  { t: 'Recognition has to be specific and timely', d: 'Generic praise fades. Recognition that names what someone actually did, soon after they did it, changes what they do next.', how: 'Shout-outs tied to real, verified performance, sent while it still matters.' },
+  { t: 'People are driven by visible progress', d: 'Seeing yourself move forward, even in small steps, is one of the strongest everyday motivators.', how: 'On-time streaks, milestones and credentials completed, all visible in the app.' },
+  { t: 'Clarity and control reduce friction', d: 'People show up more reliably when they know what’s expected and feel some control over their work.', how: 'Shifts, pay and requirements in one place, in each worker’s own language.' },
+];
+
+// A real cycle, so shown in order.
+const loop = ['Verified shift', 'Same-shift pay', 'Specific recognition', 'Visible progress', 'Shows up tomorrow'];
+---
+<Base title="The Science of Motivation | CrewTeams" description="Why crews show up and stay: the motivation science behind CrewTeams pay and recognition, built with One10.">
+
+  <!-- HERO -->
+  <section class="s-hero">
+    <div class="wrap">
+      <p class="crumb"><a href="/company/">Company</a> <span>/</span> The Science of Motivation</p>
+      <span class="eyebrow">The Science of Motivation</span>
+      <h1>Why crews show up, <span class="grad-text">and why they stay.</span></h1>
+      <p class="lede">Pay matters. But when it arrives, how effort is recognized and whether people can see their own progress matter just as much. CrewTeams builds all three into every shift, grounded in motivation science from our partner One10.</p>
+    </div>
+  </section>
+
+  <!-- THE LOOP -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">The motivation loop</span>
+        <h2>Every verified shift starts the next one.</h2>
+        <p class="lede">CrewTeams connects the moment a shift is verified to pay, recognition and progress, so showing up tomorrow is the natural next step.</p>
+      </div>
+      <ol class="loop" aria-label="The CrewTeams motivation loop">
+        {loop.map((l, i) => <li><span class="n">{i + 1}</span><span class="t">{l}</span></li>)}
+      </ol>
+      <p class="loop-note">…and the loop starts again.</p>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">What the science says</span>
+        <h2>Four principles, built into the platform.</h2>
+      </div>
+      <div class="principles">
+        {principles.map((p) => (
+          <article class="pr">
+            <h3>{p.t}</h3>
+            <p>{p.d}</p>
+            <div class="how"><span>In CrewTeams</span>{p.how}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ONE10 -->
+  <section class="section dark">
+    <div class="wrap one10">
+      <div>
+        <span class="eyebrow">Built with One10</span>
+        <h2>Motivation science from people who’ve practiced it for decades.</h2>
+      </div>
+      <div>
+        <p class="lede">One10 designs incentive, recognition and engagement programs grounded in motivation science, combining behavioral and data science with more than 80 years of experience.</p>
+        <p class="lede">Together, we’ve brought that expertise to the frontline: pay and recognition designed around how crews actually work, delivered on the phone already in their pocket.</p>
+        <a class="ext" href="https://www.one10marketing.com/" rel="noopener">Learn more about One10 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section class="section">
+    <div class="wrap why">
+      <div>
+        <span class="eyebrow">Why it matters</span>
+        <h2>Replacing a good worker costs far more than keeping one.</h2>
+      </div>
+      <div>
+        <p>Every worker who leaves takes their training, their site knowledge and their credentials with them, and leaves a gap the rest of the crew has to cover. Recruiting, onboarding and re-credentialing their replacement all cost time and money.</p>
+        <p>Motivation science won’t fix a bad job. But on a good one, paying promptly, recognizing real effort and making progress visible are some of the lowest-cost ways to keep your best people.</p>
+        <p><a class="int" href="/platform/#reward">See how Instant Pay &amp; Recognition works →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <PageCTA title="See the motivation loop on one of your crews." text="We’ll show you what your workers see after a verified shift: their pay, their recognition and their progress." />
+</Base>
+
+<style>
+  .s-hero { padding: 56px 0 56px; background: radial-gradient(1000px 420px at 90% -20%, rgba(26,138,80,.10), transparent 60%), radial-gradient(800px 420px at -10% 0%, rgba(30,99,165,.10), transparent 60%); }
+  .s-hero h1 { max-width: 20ch; font-size: clamp(2.2rem, 4.6vw, 3.5rem); text-wrap: balance; }
+  .s-hero .lede { margin-top: 18px; }
+  .crumb { font-size: .9rem; color: var(--muted); margin: 0 0 16px; }
+  .crumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .crumb span { margin: 0 6px; color: var(--line); }
+
+  .head { max-width: 760px; margin-bottom: 40px; }
+  .head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .head h2 { text-wrap: balance; }
+
+  /* Loop */
+  .loop { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; position: relative; }
+  .loop li { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px 16px; display: grid; gap: 10px; justify-items: center; text-align: center; }
+  .loop li:not(:last-child)::after { content: ''; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); border-left: 10px solid var(--teal); border-top: 7px solid transparent; border-bottom: 7px solid transparent; z-index: 1; }
+  .loop li:last-child { background: var(--ink); border-color: var(--ink); }
+  .loop li:last-child .t { color: #fff; }
+  .loop .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--brand-grad); color: #fff; font-weight: 900; }
+  .loop .t { font-weight: 700; color: var(--ink); line-height: 1.25; }
+  .loop-note { text-align: center; color: var(--muted); margin: 18px 0 0; font-style: italic; }
+
+  /* Principles */
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .pr { border: 1px solid var(--line); border-radius: 18px; padding: 26px 24px; display: flex; flex-direction: column; }
+  .pr h3 { font-size: 1.15rem; text-wrap: balance; }
+  .pr p { color: var(--muted); margin: 0 0 16px; }
+  .how { margin-top: auto; background: #E6F2EC; border-radius: 12px; padding: 12px 14px; color: var(--ink); font-weight: 500; font-size: .95rem; }
+  .how span { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 2px; }
+
+  /* One10 */
+  .one10 { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+  .one10 h2 { text-wrap: balance; }
+  .ext { display: inline-block; margin-top: 8px; color: #fff; font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--gold); }
+
+  /* Why */
+  .why { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+  .why h2 { text-wrap: balance; }
+  .why p { color: var(--muted); }
+  .int { font-weight: 700; color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 960px) {
+    .one10, .why { grid-template-columns: 1fr; gap: 24px; }
+    .principles { grid-template-columns: 1fr; }
+    .loop { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; gap: 18px; }
+    .loop li { grid-template-columns: 34px 1fr; justify-items: start; text-align: left; align-items: center; padding: 14px 16px; }
+    .loop li:not(:last-child)::after { right: auto; left: 50%; top: auto; bottom: -15px; transform: translateX(-50%); border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid var(--teal); border-bottom: 0; }
+    .section { padding: 72px 0; }
+  }
+  @media (max-width: 560px) {
+    .s-hero { padding-top: 32px; }
+  }
+</style>

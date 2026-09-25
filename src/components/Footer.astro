@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
       </div>
       {nav.map((col) => (
         <div>
-          <h4>{col.label}</h4>
+          <h4><a href={col.href}>{col.label}</a></h4>
           <ul>{col.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}</ul>
         </div>
       ))}
