@@ -1,0 +1,271 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageCTA from '../../components/PageCTA.astro';
+import { site } from '../../data/site.js';
+
+const pains = [
+  { t: 'Buddy punching', d: 'One worker clocks in a friend who’s running late, or not coming at all.' },
+  { t: 'Off-site clock-ins', d: 'Punches from the parking lot, the truck or home get paid as time on the job.' },
+  { t: 'Padded hours', d: 'Paper sheets and manual edits round up, add minutes and are impossible to audit.' },
+  { t: 'Disputes and grievances', d: 'Without proof of who was where and when, every pay dispute becomes your word against theirs.' },
+];
+
+// A real sequence, so numbered.
+const steps = [
+  { t: 'Worker arrives on site', d: 'Opens the CrewTeams app on their phone when they reach the job.' },
+  { t: 'Face match + liveness', d: 'The camera matches their face to their enrolled profile and checks it’s a live person, not a photo.' },
+  { t: 'Location confirmed', d: 'Geofencing confirms the punch is happening inside the job-site boundary.' },
+  { t: 'Verified punch recorded', d: 'Who, where and when are stored together. Supervisors see it immediately and payroll gets clean hours.' },
+];
+
+const features = [
+  { t: 'Facial geometry matching', d: 'Matches each worker’s face to their enrolled profile at every clock-in and clock-out.' },
+  { t: 'Liveness detection', d: 'Tells a live person from a photo or video, so nobody can punch in for someone else.' },
+  { t: 'Job-site geofencing', d: 'Each site gets a boundary. A punch only counts when it’s made inside it.' },
+  { t: 'Works offline', d: 'No signal on a remote site? The punch, photo, time and location are captured on the phone, then verified and synced when the connection returns.' },
+  { t: 'Live attendance view', d: 'Supervisors see who’s on site and who’s missing across every location, from one screen.' },
+  { t: 'Audit-ready history', d: 'Every punch keeps its identity check, location and time, ready for payroll reviews, client audits and disputes.' },
+];
+
+const connected = [
+  { verb: 'Comply', t: 'Only qualified workers clock in', d: 'Compliance Shield™ checks credentials at the punch, and applies overtime, rest and meal-break rules to the verified hours.', href: '/platform/compliance-shield/' },
+  { verb: 'Engage', t: 'Clock in from the Crew App', d: 'Punching happens in Mobilize™, the same app where workers see their shifts, pay and recognition.', href: '/platform/mobilize/' },
+  { verb: 'Reward', t: 'Verified shift, same-shift pay', d: 'Once a shift is verified, pay can go out the same day. No waiting on timesheet approval.', href: '/platform/#reward' },
+];
+
+const privacy = [
+  { t: 'Consent before enrollment', d: 'Each worker is told what’s collected, why and for how long, and gives written consent before their face is enrolled.' },
+  { t: 'Used only to verify identity', d: 'Face data is used to confirm who is clocking in and out. It is never sold, and never used for marketing or any other purpose.' },
+  { t: 'Retention limits and deletion', d: 'Biometric data is deleted when a worker leaves or when the retention period required by law ends, whichever comes first.' },
+  { t: 'Worker rights built in', d: 'Workers can ask what’s held about them and request correction or deletion, as laws like Brazil’s LGPD require.' },
+  { t: 'Secure, limited access', d: 'Stored on enterprise cloud infrastructure, with access limited to the identity check itself.' },
+  { t: 'Records for your compliance team', d: 'Consent records and retention settings for every worker and location, ready for audits.' },
+];
+const laws = ['Brazil · LGPD', 'Illinois · BIPA', 'Texas · CUBI', 'Washington · HB 1493'];
+
+const faqs = [
+  { q: 'Is workers’ face data sold or shared?', a: 'No. It’s used only to verify identity at clock-in and clock-out, with the worker’s written consent, and deleted when it’s no longer needed.' },
+  { q: 'What if a site has no cell signal?', a: 'The app captures the punch, photo, time and location on the phone, then completes verification and syncs automatically when the connection comes back. The original time and location are kept.' },
+  { q: 'Can workers clock in from home or the parking lot?', a: 'No. A punch only counts inside the job-site geofence you set for each location.' },
+  { q: 'Can someone use a photo of a coworker?', a: 'No. Liveness detection checks that a real, present person is in front of the camera before the face match is accepted.' },
+  { q: 'How does verified time get to payroll?', a: 'Verified hours flow to your payroll system through our integrations, so nobody re-keys timesheets.' },
+];
+---
+<Base title="Biometric Time & Attendance | CrewTeams" description="Face-matched, liveness-checked, geofenced punches that work offline. Pay only for hours actually worked on the job site.">
+
+  <!-- HERO -->
+  <section class="t-hero">
+    <div class="wrap t-hero-grid">
+      <div>
+        <p class="crumb"><a href="/platform/">Platform</a> <span>/</span> Verify</p>
+        <span class="cap-verb">Verify</span>
+        <h1>Pay for the hours actually worked. <span class="grad-text">On the actual job site.</span></h1>
+        <p class="lede">Biometric Time &amp; Attendance confirms every punch with a face match, a liveness check and the job-site location, even on sites with patchy signal. Bad punches stop reaching payroll.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={site.demoUrl}>Request a Demo</a>
+          <a class="btn btn-ghost" href="#how">See a verified punch</a>
+        </div>
+      </div>
+      <div class="t-media">
+        <img src="/img/hero-biometrics.jpg" alt="Construction worker clocking in with a face match on his phone at a job site" width="1800" height="982" />
+        <div class="chip chip-a"><span class="dot"></span><div><strong>Face match ✓ · Live person ✓</strong><small>Site 14 geofence · 6:58 AM</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">The problem</span>
+        <h2>Every bad punch goes straight into payroll.</h2>
+        <p class="lede">Punch clocks, paper sheets and PIN codes can’t tell you who actually clocked in, or where they were when they did.</p>
+      </div>
+      <div class="pains">
+        {pains.map((p) => <article class="pain"><h3>{p.t}</h3><p>{p.d}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">How a verified punch works</span>
+        <h2>Four checks. A few seconds. No hardware on site.</h2>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li><span class="n">{i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">What’s included</span>
+        <h2>Built for job sites, not office lobbies.</h2>
+      </div>
+      <div class="feats">
+        {features.map((f) => <article class="feat"><h3>{f.t}</h3><p>{f.d}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="section privacy" id="privacy">
+    <div class="wrap priv-grid">
+      <div>
+        <span class="eyebrow">Biometric privacy &amp; consent</span>
+        <h2>Designed for the world’s strictest biometric privacy laws.</h2>
+        <p class="lede">Face data is sensitive, and more governments regulate it every year. The underlying platform already operates under Brazil’s LGPD, which treats biometric data as sensitive personal data. CrewTeams brings the same discipline to the U.S. and Canada.</p>
+        <ul class="laws" aria-label="Laws this is designed around">{laws.map((l) => <li>{l}</li>)}</ul>
+        <p class="fine">CrewTeams is designed to help employers meet their obligations under these laws. Employers remain responsible for their own compliance and should confirm requirements with counsel.</p>
+      </div>
+      <div class="priv-list">
+        {privacy.map((x) => (
+          <article>
+            <span class="lock" aria-hidden="true"></span>
+            <div><h3>{x.t}</h3><p>{x.d}</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECTED -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Connected, not standalone</span>
+        <h2>A verified punch does more than record time.</h2>
+        <p class="lede">Because everything about every worker lives in one place, each verified punch feeds compliance, the crew app and pay automatically.</p>
+      </div>
+      <div class="conn">
+        {connected.map((c) => (
+          <a class="conn-card" href={c.href}>
+            <span class="cap-verb sm">{c.verb}</span>
+            <h3>{c.t}</h3>
+            <p>{c.d}</p>
+            <span class="more">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="wrap faq-wrap">
+      <div>
+        <span class="eyebrow">Common questions</span>
+        <h2>What operators ask us about biometric time &amp; attendance.</h2>
+      </div>
+      <div class="faqs">
+        {faqs.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PageCTA title="See a verified punch on one of your sites." text="We’ll set up a geofence at one of your locations and walk your supervisors through clock-in, verification and payroll-ready hours." />
+</Base>
+
+<style>
+  .t-hero { padding: 56px 0 56px; background: radial-gradient(1000px 420px at 90% -20%, rgba(26,138,80,.10), transparent 60%), radial-gradient(800px 420px at -10% 0%, rgba(30,99,165,.10), transparent 60%); }
+  .t-hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .t-hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.2rem); text-wrap: balance; }
+  .t-hero .lede { margin: 18px 0 28px; }
+  .crumb { font-size: .9rem; color: var(--muted); margin: 0 0 16px; }
+  .crumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .crumb span { margin: 0 6px; color: var(--line); }
+  .cap-verb { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--brand-grad); padding: 4px 11px; border-radius: 999px; margin-bottom: 14px; }
+  .cap-verb.sm { margin-bottom: 12px; }
+  .t-media { position: relative; }
+  .t-media img { width: 100%; aspect-ratio: 4/3.4; object-fit: cover; object-position: 55% center; border-radius: 22px; box-shadow: 0 30px 60px rgba(11,31,51,.18); }
+  .chip { position: absolute; background: #fff; border-radius: 14px; box-shadow: var(--shadow); padding: 12px 16px; display: flex; gap: 10px; align-items: center; font-size: .9rem; }
+  .chip strong { display: block; color: var(--ink); }
+  .chip small { color: var(--muted); }
+  .chip-a { left: -24px; bottom: 32px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 0 5px rgba(42,145,86,.18); flex: none; }
+
+  .head { max-width: 760px; margin-bottom: 40px; }
+  .head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .head h2 { text-wrap: balance; }
+
+  .pains { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .pain { background: #fff; border-radius: var(--radius); padding: 24px 22px; border-top: 4px solid #C8553D; box-shadow: 0 2px 10px rgba(11,31,51,.05); }
+  .pain h3 { font-size: 1.1rem; }
+  .pain p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 22px; left: 12%; right: 12%; height: 3px; background: var(--brand-grad); }
+  .steps li { position: relative; text-align: center; padding: 0 6px; }
+  .steps .n { position: relative; display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #fff; border: 3px solid var(--teal); color: var(--ink); font-weight: 900; font-size: 1.1rem; margin-bottom: 14px; }
+  .steps h3 { font-size: 1.05rem; }
+  .steps p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .feat { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 22px; }
+  .feat h3 { font-size: 1.05rem; }
+  .feat p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .conn { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .conn-card { display: block; text-decoration: none; color: inherit; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 24px; transition: box-shadow .15s, transform .15s; }
+  .conn-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .conn-card h3 { font-size: 1.1rem; }
+  .conn-card p { color: var(--muted); font-size: .95rem; margin: 0 0 14px; }
+  .more { font-weight: 700; color: var(--blue); font-size: .95rem; }
+
+  .faq-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; }
+  .faq-wrap h2 { text-wrap: balance; }
+  .faqs { display: grid; gap: 12px; }
+  details { border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; background: #fff; }
+  summary { cursor: pointer; list-style: none; padding: 18px 28px 18px 0; font-weight: 700; color: var(--ink); position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 0; top: 14px; font-size: 1.4rem; color: var(--teal); font-weight: 400; }
+  details[open] summary::after { content: '–'; }
+  details p { margin: 0 0 18px; color: var(--muted); }
+
+  /* Privacy */
+  .privacy { background: var(--ink); color: #D5DEE8; }
+  .privacy h2, .privacy h3 { color: #fff; }
+  .privacy .eyebrow { color: var(--gold); }
+  .privacy .lede { color: #AFC0D2; }
+  .priv-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: start; }
+  .priv-grid h2 { text-wrap: balance; }
+  .laws { list-style: none; padding: 0; margin: 24px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .laws li { border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: .9rem; color: #fff; }
+  .fine { font-size: .82rem; color: #8FA3B8; margin: 0; max-width: 52ch; }
+  .priv-list { display: grid; gap: 12px; }
+  .priv-list article { display: grid; grid-template-columns: 36px 1fr; gap: 14px; background: var(--ink-2); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 18px 20px; }
+  .priv-list h3 { font-size: 1.02rem; margin-bottom: 4px; }
+  .priv-list p { margin: 0; color: #AFC0D2; font-size: .95rem; }
+  .lock { width: 36px; height: 36px; border-radius: 10px; background: rgba(42,145,86,.18); position: relative; }
+  .lock::before { content: ''; position: absolute; left: 11px; top: 16px; width: 14px; height: 11px; border-radius: 3px; background: var(--green-bright); }
+  .lock::after { content: ''; position: absolute; left: 13px; top: 8px; width: 10px; height: 10px; border: 2.5px solid var(--green-bright); border-bottom: 0; border-radius: 7px 7px 0 0; }
+
+  @media (max-width: 960px) {
+    .t-hero-grid, .faq-wrap, .priv-grid { grid-template-columns: 1fr; gap: 36px; }
+    .pains { grid-template-columns: 1fr 1fr; }
+    .feats, .conn { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; row-gap: 32px; }
+    .steps::before { display: none; }
+    .chip-a { left: 12px; bottom: 12px; }
+    .section { padding: 72px 0; }
+  }
+  @media (max-width: 560px) {
+    .pains, .feats, .conn, .steps { grid-template-columns: 1fr; }
+    .steps li { text-align: left; display: grid; grid-template-columns: 46px 1fr; column-gap: 16px; }
+    .steps .n { grid-row: span 2; margin: 0; }
+    .t-hero { padding-top: 32px; }
+    .chip-a { font-size: .8rem; padding: 8px 12px; }
+  }
+</style>
