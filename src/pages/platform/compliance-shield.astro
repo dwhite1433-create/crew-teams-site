@@ -1,0 +1,270 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageCTA from '../../components/PageCTA.astro';
+import { site } from '../../data/site.js';
+
+const pains = [
+  { t: 'The inspector finds it first', d: 'An expired certification on a job site means a stop-work order, a fine or a lost client.' },
+  { t: 'Break and overtime penalties', d: 'A missed meal break or unplanned overtime turns into premium pay, penalties and class-action risk.' },
+  { t: 'Union grievances', d: 'One missed CBA rule on rest periods or seniority can become a formal grievance.' },
+  { t: 'Spreadsheets nobody trusts', d: 'Certification tracking lives in a spreadsheet that was out of date the day it was built.' },
+];
+
+const credExamples = [
+  { ind: 'Construction', ex: 'OSHA-10 / OSHA-30, forklift, scaffold, confined space' },
+  { ind: 'Security Services', ex: 'State guard license, firearms permit, first aid / CPR' },
+  { ind: 'Transportation & Logistics', ex: 'CDL, DOT medical card, hazmat endorsement' },
+  { ind: 'Industrial Cleaning', ex: 'Chemical handling, respirator fit test, lockout/tagout' },
+  { ind: 'Manufacturing', ex: 'Equipment certifications, safety training, site inductions' },
+];
+
+const rules = ['Daily & weekly overtime', 'Meal breaks', 'Rest periods', 'Minimum rest between shifts', 'Union & CBA terms', 'Site-specific requirements'];
+
+// A real sequence, so numbered.
+const steps = [
+  { t: 'Set the requirements', d: 'Define which credentials and labor rules apply to each site, role and crew.' },
+  { t: 'Credentials on file', d: 'Workers’ cards and certificates are stored with their profile. They update them with a photo from the app.' },
+  { t: 'Checked at every clock-in', d: 'Before a shift starts, CrewTeams confirms the worker holds what that site requires.' },
+  { t: 'Rules applied to every hour', d: 'Verified hours are checked against overtime, break and CBA rules, and exceptions are flagged before payroll.' },
+];
+
+const connected = [
+  { verb: 'Verify', t: 'Checked at the verified punch', d: 'Credentials are confirmed at the same moment the worker’s face and location are, so there’s no gap.', href: '/platform/time-attendance/' },
+  { verb: 'Engage', t: 'Workers fix it themselves', d: 'Expiry reminders land in Mobilize™ and by text, and workers update a card with a photo.', href: '/platform/mobilize/' },
+  { verb: 'CARI™', t: 'Reminders that actually get read', d: 'CARI™ nudges workers and supervisors before something expires, in each worker’s language.', href: '/platform/cari/' },
+];
+
+const faqs = [
+  { q: 'Which credentials can we track?', a: 'Any certification, license or training your sites require. You define them by site, role or crew, and CrewTeams tracks each worker’s status and expiry dates.' },
+  { q: 'What happens when a credential expires?', a: 'The worker and supervisor are warned ahead of time. If it lapses, the worker can’t start a shift at a site that requires it until the renewed card is on file.' },
+  { q: 'Can different sites follow different rules?', a: 'Yes. Each site, crew or union agreement can carry its own overtime, break and rest rules, so a union site and a non-union site can run side by side.' },
+  { q: 'Does this replace our legal or compliance team?', a: 'No. Compliance Shield™ enforces the rules you set and keeps the records. Your team and counsel decide what the rules should be.' },
+];
+---
+<Base title="Compliance Shield™ | CrewTeams" description="Track every credential, warn before anything expires, stop unqualified workers from starting a shift, and apply overtime, break and union rules to every verified hour.">
+
+  <!-- HERO -->
+  <section class="c-hero">
+    <div class="wrap c-hero-grid">
+      <div>
+        <p class="crumb"><a href="/platform/">Platform</a> <span>/</span> Comply</p>
+        <span class="cap-verb">Comply</span>
+        <h1>Only qualified people on the job. <span class="grad-text">Every hour under the right rules.</span></h1>
+        <p class="lede">Compliance Shield™ tracks every credential, warns before anything expires, stops an unqualified worker from starting a shift, and applies overtime, break and union rules to every verified hour.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={site.demoUrl}>Request a Demo</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+      </div>
+
+      <!-- Example site status card -->
+      <div class="shield" role="img" aria-label="Example Compliance Shield status for a job site">
+        <div class="sh-head"><strong>Site 14 · Today</strong><span>21 workers</span></div>
+        <div class="sh-stats">
+          <div class="ok"><strong>18</strong><span>Cleared</span></div>
+          <div class="warn"><strong>2</strong><span>Expiring &lt; 30 days</span></div>
+          <div class="stop"><strong>1</strong><span>Blocked</span></div>
+        </div>
+        <ul class="sh-list">
+          <li class="stop"><b>J. Ortiz</b><span>Forklift cert expired · can’t clock in</span></li>
+          <li class="warn"><b>L. Mendes</b><span>OSHA-10 expires in 14 days</span></li>
+          <li class="warn"><b>A. Kim</b><span>Meal break due in 20 min</span></li>
+          <li class="ok"><b>Local 12 CBA</b><span>Rest-period rules applied</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN -->
+  <section class="section soft">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">The problem</span>
+        <h2>Compliance fails on the job site, not in the office.</h2>
+        <p class="lede">The rules are written down somewhere. The problem is checking them for every worker, on every shift, at every site.</p>
+      </div>
+      <div class="pains">
+        {pains.map((p) => <article class="pain"><h3>{p.t}</h3><p>{p.d}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO HALVES -->
+  <section class="section">
+    <div class="wrap halves">
+      <article class="half">
+        <span class="eyebrow">Credentials</span>
+        <h2>Right person, right credentials, every shift.</h2>
+        <ul class="ticks">
+          <li>Tracks certifications, licenses and training for every worker</li>
+          <li>Warns the worker and supervisor before anything expires</li>
+          <li>Workers update a renewed card with a photo from the app</li>
+          <li>Stops an unqualified worker from starting a shift at a site that requires it</li>
+        </ul>
+        <div class="examples">
+          <p class="ex-title">Built for the credentials your crews carry</p>
+          {credExamples.map((c) => <div class="ex"><strong>{c.ind}</strong><span>{c.ex}</span></div>)}
+        </div>
+      </article>
+      <article class="half">
+        <span class="eyebrow">Labor rules</span>
+        <h2>Every verified hour, under the right rules.</h2>
+        <ul class="ticks">
+          <li>Applies overtime, meal-break and rest-period rules automatically</li>
+          <li>Different rules per site, crew or union agreement</li>
+          <li>Flags exceptions before they reach payroll</li>
+          <li>Keeps a record of every check for audits and grievances</li>
+        </ul>
+        <div class="rules">
+          <p class="ex-title">Rules it enforces</p>
+          <ul>{rules.map((r) => <li>{r}</li>)}</ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section soft" id="how">
+    <div class="wrap">
+      <div class="head center">
+        <span class="eyebrow">How it works</span>
+        <h2>Set the rules once. CrewTeams checks them every shift.</h2>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => <li><span class="n">{i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <!-- CONNECTED -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Connected, not standalone</span>
+        <h2>Compliance that happens where the work does.</h2>
+        <p class="lede">Because everything about every worker lives in one place, compliance isn’t a separate system someone has to remember to check.</p>
+      </div>
+      <div class="conn">
+        {connected.map((c) => (
+          <a class="conn-card" href={c.href}>
+            <span class="cap-verb sm">{c.verb}</span>
+            <h3>{c.t}</h3>
+            <p>{c.d}</p>
+            <span class="more">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section soft">
+    <div class="wrap faq-wrap">
+      <div>
+        <span class="eyebrow">Common questions</span>
+        <h2>What operators ask us about compliance.</h2>
+      </div>
+      <div class="faqs">
+        {faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <PageCTA title="See Compliance Shield™ on one of your sites." text="Bring us your credential list and your toughest labor rules. We’ll show you how they’re checked on every shift." />
+</Base>
+
+<style>
+  .c-hero { padding: 56px 0 64px; background: radial-gradient(1000px 420px at 90% -20%, rgba(26,138,80,.10), transparent 60%), radial-gradient(800px 420px at -10% 0%, rgba(30,99,165,.10), transparent 60%); }
+  .c-hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .c-hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.2rem); text-wrap: balance; }
+  .c-hero .lede { margin: 18px 0 28px; }
+  .crumb { font-size: .9rem; color: var(--muted); margin: 0 0 16px; }
+  .crumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .crumb span { margin: 0 6px; color: var(--line); }
+  .cap-verb { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--brand-grad); padding: 4px 11px; border-radius: 999px; margin-bottom: 14px; }
+  .cap-verb.sm { margin-bottom: 12px; }
+
+  /* Status card */
+  .shield { background: #fff; border-radius: 22px; box-shadow: 0 30px 60px rgba(11,31,51,.16); border: 1px solid var(--line); padding: 22px; display: grid; gap: 16px; max-width: 460px; width: 100%; justify-self: center; }
+  .sh-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .sh-head strong { color: var(--ink); font-size: 1.1rem; }
+  .sh-head span { color: var(--muted); font-size: .9rem; }
+  .sh-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .sh-stats div { border-radius: 12px; padding: 12px; display: grid; gap: 2px; }
+  .sh-stats strong { font-size: 1.8rem; font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums; }
+  .sh-stats span { font-size: .78rem; font-weight: 500; }
+  .ok { --c: #1A8A50; --bg: #E6F2EC; }
+  .warn { --c: #9A6A00; --bg: #FFF6E3; }
+  .stop { --c: #A5402B; --bg: #FBEDE9; }
+  .sh-stats div { background: var(--bg); color: var(--c); }
+  .sh-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .sh-list li { display: grid; gap: 1px; padding: 10px 12px 10px 14px; border-radius: 10px; background: var(--bg-soft); border-left: 4px solid var(--c); font-size: .9rem; }
+  .sh-list b { color: var(--ink); }
+  .sh-list span { color: var(--muted); }
+
+  .head { max-width: 760px; margin-bottom: 40px; }
+  .head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .head h2 { text-wrap: balance; }
+
+  .pains { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .pain { background: #fff; border-radius: var(--radius); padding: 24px 22px; border-top: 4px solid #C8553D; box-shadow: 0 2px 10px rgba(11,31,51,.05); }
+  .pain h3 { font-size: 1.1rem; }
+  .pain p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+  /* Two halves */
+  .halves { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .half { border: 1px solid var(--line); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; }
+  .half h2 { font-size: clamp(1.5rem, 2.4vw, 1.9rem); text-wrap: balance; }
+  .ticks { list-style: none; padding: 0; margin: 8px 0 24px; }
+  .ticks li { position: relative; padding-left: 30px; margin-bottom: 12px; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: .45em; width: 16px; height: 9px; border-left: 3px solid var(--green-bright); border-bottom: 3px solid var(--green-bright); transform: rotate(-45deg); }
+  .ex-title { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+  .examples, .rules { margin-top: auto; background: var(--bg-soft); border-radius: 14px; padding: 18px; }
+  .ex { display: grid; grid-template-columns: 11rem 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: .92rem; }
+  .ex:first-of-type { border-top: 0; }
+  .ex strong { color: var(--ink); }
+  .ex span { color: var(--muted); }
+  .rules ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .rules li { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; font-weight: 500; font-size: .92rem; color: var(--ink); }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 22px; left: 12%; right: 12%; height: 3px; background: var(--brand-grad); }
+  .steps li { position: relative; text-align: center; padding: 0 6px; }
+  .steps .n { position: relative; display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #fff; border: 3px solid var(--teal); color: var(--ink); font-weight: 900; font-size: 1.1rem; margin-bottom: 14px; }
+  .steps h3 { font-size: 1.05rem; }
+  .steps p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .conn { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .conn-card { display: block; text-decoration: none; color: inherit; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 24px; transition: box-shadow .15s, transform .15s; }
+  .conn-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .conn-card h3 { font-size: 1.1rem; }
+  .conn-card p { color: var(--muted); font-size: .95rem; margin: 0 0 14px; }
+  .more { font-weight: 700; color: var(--blue); font-size: .95rem; }
+
+  .faq-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; }
+  .faq-wrap h2 { text-wrap: balance; }
+  .faqs { display: grid; gap: 12px; }
+  details { border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; background: #fff; }
+  summary { cursor: pointer; list-style: none; padding: 18px 28px 18px 0; font-weight: 700; color: var(--ink); position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 0; top: 14px; font-size: 1.4rem; color: var(--teal); font-weight: 400; }
+  details[open] summary::after { content: '–'; }
+  details p { margin: 0 0 18px; color: var(--muted); }
+
+  @media (max-width: 960px) {
+    .c-hero-grid, .faq-wrap, .halves { grid-template-columns: 1fr; gap: 28px; }
+    .pains { grid-template-columns: 1fr 1fr; }
+    .conn { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; row-gap: 32px; }
+    .steps::before { display: none; }
+    .section { padding: 72px 0; }
+  }
+  @media (max-width: 560px) {
+    .pains, .conn, .steps { grid-template-columns: 1fr; }
+    .steps li { text-align: left; display: grid; grid-template-columns: 46px 1fr; column-gap: 16px; }
+    .steps .n { grid-row: span 2; margin: 0; }
+    .half { padding: 22px; }
+    .ex { grid-template-columns: 1fr; gap: 2px; }
+    .c-hero { padding-top: 32px; }
+  }
+</style>
